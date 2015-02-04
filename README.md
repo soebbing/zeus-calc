@@ -3,11 +3,15 @@
 Dieses Bookmarklet berechnet die zu leistende/geleistete Arbeitszeit (auf Wochenbasis) die nötig ist, um am Freitag
 pünktlich um 14 Uhr Feierabend zu machen.
 
-## Installation und Anwendung
+## Installation
 
 Erstelle ein neues Lesezeichen in Deinem Browser und hinterlege als URL den folgenden Code:
 
-    javascript:(function(){var jsCode=document.createElement('script');jsCode.setAttribute('src','http://soebbi.de/zeus.js?'+Math.random());document.body.appendChild(jsCode);}());
+    javascript:(function(){var url='https://rawgit.com/soebbing/zeus-calc/master/zeus.js';var jsCode=document.createElement('script');jsCode.setAttribute('src',url+'?'+Math.random());document.body.appendChild(jsCode);}());
+
+Du musst eventuell die JS-Datei auf einen eigenen Server legen und die URL in der "url"-Variable entsprechend anpassen.
+
+## Anwendung
 
 Um nun zu schauen ob Du für heute genug gearbeitet hast logge Dich in die Zeiterfassung ein, klicke auf "Wochenarbeitszeit"
 und rufe Dein Lesezeichen auf.
