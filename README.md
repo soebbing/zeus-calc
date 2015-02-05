@@ -13,7 +13,7 @@ Du musst eventuell die JS-Datei auf einen eigenen Server legen und die URL in de
 
 ## Anwendung
 
-Um nun zu schauen ob Du für heute genug gearbeitet hast logge Dich in die Zeiterfassung ein, klicke auf "Wochenarbeitszeit"
+Um nun zu schauen ob Du für heute genug gearbeitet hast logge Dich in die Zeiterfassung ein, klicke auf "Stunden pro Woche"
 und rufe Dein Lesezeichen auf.
 
 Neben der Wochenarbeitszeit erscheint dann ein neuer Wert der die Zeitdifferenz zur zum heutigen Wochentag nötigen Arbeitszeit darstellt.
