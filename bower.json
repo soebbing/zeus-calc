@@ -1,0 +1,22 @@
+{
+  "name": "zeus-calc",
+  "version": "0.0.1",
+  "homepage": "https://github.com/soebbing/zeus-calc",
+  "authors": [
+    "Hendrik Söbbing <hendrik@soebbing.de>"
+  ],
+  "description": "Ein Tool zur Darstellung der Restarbeitszeit in der Zeus Zeiterfassung.",
+  "main": "zeus.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "~0.12.2"
+  }
+}
