@@ -1,21 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta charset="utf-8">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <title>Modern Web Development Sandbox</title>
-        <script src="bower_components/react/react.js"></script>
-        <script src="bower_components/react/JSXTransformer.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </head>
     <body>
-        <header>
-        </header>
-        <div class="jumbotron">
-        </div>
-        <footer>
-        </footer>
-        <script type="text/jsx" src="app/src/hello.js"></script>
-        <script type="text/jsx">
-            React.renderComponent(<UpdateText/>, document.querySelector('.jumbotron'));
-        </script>
+    <div id="app"></div>
     </body>
+    <script type="text/javascript" data-main="/app/src/app" src="/app/vendors/requirejs/require.js"></script>
 </html>

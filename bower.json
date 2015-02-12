@@ -17,6 +17,8 @@
     "tests"
   ],
   "dependencies": {
-    "react": "~0.12.2"
+    "react": "~0.12.2",
+    "requirejs": "~2.1.16",
+    "jsx-requirejs-plugin": "~0.5.2"
   }
 }
