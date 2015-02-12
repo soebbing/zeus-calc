@@ -15,6 +15,13 @@ require([
     'react',
     'jsx!src/components/Application'
     ], function(React, Application) {
+
+    var css = document.createElement('link');
+    css.rel = 'text/css';
+    css.src = 'https://rawgit.com/soebbing/zeus-calc/react/app/css/app.css';
+
+    document.getElementsByName('head')[0].appendChild(css);
+
     Application = React.createFactory(Application);
 
     React.render(Application({hoursWorked: 32}), document.getElementById('app'));

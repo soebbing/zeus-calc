@@ -3,17 +3,44 @@ define(['react'], function(React) {
 
     var Graph = React.createClass({
         render: function(){
+
+            var colorLow = '#f00'; // Erstmal ist der Wert rot wenn zuwenig Stunden geleistet wurden.
+            var colorOk = '#F08900'; // Sind wir allgemein im Plus wird die Farbe Orange
+            var colorGreat = '#090';
+
+            var color = colorLow;
+
+            var completed = this.props.hoursPerWeek/100 * this.props.hoursWorked;
+            if (completed < 0) {
+                completed = 0;
+            }
+            if (completed > 100) {
+                completed = 100;
+            }
+
+            if (completed > 30) {
+                color = colorOk;
+            }
+
+            if (completed > 30) {
+                color = colorGreat;
+            }
+
+
+            var style = {
+                backgroundColor: this.props.color || color,
+                width: completed + '%',
+                transition: "width 500ms",
+                height: 20
+            };
+
             return (
-                <div>
-                    <h4>Hier kommt ein Graph</h4>
-                    <div className="hoursPerWeek">
-                        <span>Stunden pro Woche: </span><span>{this.props.hoursPerWeek}</span>
-                    </div>
-                    <div className="hoursWorked">
-                        <span>Stunden gearbeitet: </span><span>{this.props.hoursWorked}</span>
+                <div className="progressbar-container">
+                    <div className="progressbar-progress" style={style}>
+                        {this.props.hoursWorked}h/{this.props.hoursPerWeek}
                     </div>
                 </div>
-                )
+            );
         }
     });
 
