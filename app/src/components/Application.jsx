@@ -11,21 +11,24 @@ define([
 
     var Application = React.createClass({
       getInitialState: function(){
-        return {name: ''}
+        return {
+            hoursPerWeek: 40,
+            hoursWorked: this.props.hoursWorked
+        }
       },
-      change: function(e){
-        this.setState({name: e.target.value})
+      handleHoursPerWeekChange: function(e) {
+          this.setState({hoursPerWeek: e.hoursPerWeek})
+      },
+      componentDidMount: function() {
       },
       render: function(){
         return (
             <div>
-                <Graph />
-                <Table/>
-                <Settings/>
-              <div>
-                <input type="text" name="name" onChange={this.change} />
-                <h1> Hello {this.state.name}!!!</h1>
-              </div>
+                <h1>Zeiterfassung</h1>
+                <div>Application: {this.state.hoursPerWeek}</div>
+                <Graph hoursPerWeek={this.state.hoursPerWeek} hoursWorked={this.state.hoursWorked} />
+                <Table />
+                <Settings hoursPerWeek={this.state.hoursPerWeek} onHoursPerWeekChange={this.handleHoursPerWeekChange} />
             </div>
         )
       }

@@ -2,16 +2,16 @@
 define(['react'], function(React) {
 
     var Graph = React.createClass({
-        getInitialState: function(){
-            return {name: ''}
-        },
-        change: function(e){
-            this.setState({name: e.target.value})
-        },
         render: function(){
             return (
                 <div>
-                    Graph hier
+                    <h4>Hier kommt ein Graph</h4>
+                    <div className="hoursPerWeek">
+                        <span>Stunden pro Woche: </span><span>{this.props.hoursPerWeek}</span>
+                    </div>
+                    <div className="hoursWorked">
+                        <span>Stunden gearbeitet: </span><span>{this.props.hoursWorked}</span>
+                    </div>
                 </div>
                 )
         }

@@ -17,5 +17,5 @@ require([
     ], function(React, Application) {
     Application = React.createFactory(Application);
 
-    React.render(Application(), document.getElementById('app'));
+    React.render(Application({hoursWorked: 32}), document.getElementById('app'));
 });
