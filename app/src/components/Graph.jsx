@@ -10,7 +10,7 @@ define(['react'], function(React) {
 
             var color = colorLow;
 
-            var completed = this.props.hoursPerWeek/100 * this.props.hoursWorked;
+            var completed = this.props.hoursWorked/this.props.hoursPerWeek*100;
             if (completed < 0) {
                 completed = 0;
             }
@@ -26,11 +26,10 @@ define(['react'], function(React) {
                 color = colorGreat;
             }
 
-
             var style = {
                 backgroundColor: this.props.color || color,
                 width: completed + '%',
-                transition: "width 500ms",
+                transition: "width 1000ms",
                 height: 20
             };
 

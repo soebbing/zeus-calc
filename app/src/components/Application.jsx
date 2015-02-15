@@ -17,7 +17,7 @@ define([
         }
       },
       handleHoursPerWeekChange: function(e) {
-          this.setState({hoursPerWeek: e.hoursPerWeek})
+          this.setState({hoursPerWeek: e.hoursPerWeek, hoursWorked: e.hoursWorked})
       },
       componentDidMount: function() {
       },
@@ -25,10 +25,10 @@ define([
         return (
             <div>
                 <h1>Zeiterfassung</h1>
-                <div>Application: {this.state.hoursPerWeek}</div>
+
                 <Graph hoursPerWeek={this.state.hoursPerWeek} hoursWorked={this.state.hoursWorked} />
                 <Table />
-                <Settings hoursPerWeek={this.state.hoursPerWeek} onHoursPerWeekChange={this.handleHoursPerWeekChange} />
+                <Settings hoursPerWeek={this.state.hoursPerWeek} hoursWorked={this.state.hoursWorked} onHoursPerWeekChange={this.handleHoursPerWeekChange} />
             </div>
         )
       }
