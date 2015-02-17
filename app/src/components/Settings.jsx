@@ -3,17 +3,9 @@ define(['react'], function(React) {
 
     var Settings = React.createClass({
         onChange: function(){
-            var hoursWorked = parseFloat(this.refs.hoursWorked.getDOMNode().value.trim());
-
-            if (isNaN(hoursWorked)) {
-                hoursWorked = '';
-            }
-            var newHoursPerWeek = parseFloat(this.refs.hoursPerWeek.getDOMNode().value.trim());
-
-            if (isNaN(newHoursPerWeek)) {
-                newHoursPerWeek = '';
-            }
-            this.props.onHoursPerWeekChange({hoursPerWeek: newHoursPerWeek, hoursWorked: hoursWorked});
+            var timeWorked = this.refs.timeWorked.getDOMNode().value.trim();
+            var newTimePerWeek = parseFloat(this.refs.timePerWeek.getDOMNode().value.trim());
+            this.props.onTimePerWeekChange({timePerWeek: newTimePerWeek, timeWorked: timeWorked});
         },
         componentDidMount: function() {
             this.onChange();
@@ -23,11 +15,11 @@ define(['react'], function(React) {
                 <div>
                     <label>
                         Geleistete Stunden
-                        <input type="text" maxLength="5" value={this.props.hoursWorked} ref="hoursWorked" placeholder="Geleistete Stunden" onChange={this.onChange} />
+                        <input type="text" maxLength="5" value={this.props.timeWorked} ref="timeWorked" placeholder="Geleistete Stunden" onChange={this.onChange} />
                     </label>
 
                     <label>Wochenstunden
-                        <input type="text" maxLength="5" value={this.props.hoursPerWeek} ref="hoursPerWeek" placeholder="Stunden pro Woche" onChange={this.onChange} />
+                        <input type="text" maxLength="5" value={this.props.timePerWeek} ref="timePerWeek" placeholder="Stunden pro Woche" onChange={this.onChange} />
                     </label>
                 </div>
                 )

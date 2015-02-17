@@ -1,7 +1,9 @@
 /** @jsx React.DOM */
-define(['react'], function(React) {
+define(['react',
+    'src/services/Time'], function(React, Time) {
 
     var Graph = React.createClass({
+
         render: function(){
 
             var colorLow = '#f00'; // Erstmal ist der Wert rot wenn zuwenig Stunden geleistet wurden.
@@ -10,20 +12,23 @@ define(['react'], function(React) {
 
             var color = colorLow;
 
-            var completed = this.props.hoursWorked/this.props.hoursPerWeek*100;
+            if (this.props.timeWorked >= this.props.timeNecessary
+                && this.props.timeWorked >= this.props.timeNecessary
+                && this.props.timeWorked < this.props.timeNecessary + this.props.timeExtraToNow) {
+                color = colorOk;
+            }
+
+            if (this.props.timeWorked >= this.props.timeNecessary + this.props.timeExtraToNow) {
+                color = colorGreat;
+            }
+
+            var completed = this.props.timeWorked/(this.props.timeNecessary+this.props.timeExtraToNow)*100;
+
             if (completed < 0) {
                 completed = 0;
             }
             if (completed > 100) {
                 completed = 100;
-            }
-
-            if (completed > 30) {
-                color = colorOk;
-            }
-
-            if (completed > 30) {
-                color = colorGreat;
             }
 
             var style = {
@@ -36,7 +41,7 @@ define(['react'], function(React) {
             return (
                 <div className="progressbar-container">
                     <div className="progressbar-progress" style={style}>
-                        {this.props.hoursWorked}h/{this.props.hoursPerWeek}
+                        {this.props.timeWorked}h/{this.props.timeNecessary+this.props.timeExtraToNow}
                     </div>
                 </div>
             );

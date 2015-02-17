@@ -12,23 +12,32 @@ define([
     var Application = React.createClass({
       getInitialState: function(){
         return {
-            hoursPerWeek: 40,
-            hoursWorked: this.props.hoursWorked
+            settings: this.props.settings,
+            timeNecessary: this.props.settings.getTimeNecessaryToNow(),
+            timeExtraToNow: this.props.settings.getTimeExtraToNow(),
+            timePerWeek: this.props.settings.getTimePerWeek(),
+            timeWorked: this.props.settings.getTimeWorked()
         }
       },
-      handleHoursPerWeekChange: function(e) {
-          this.setState({hoursPerWeek: e.hoursPerWeek, hoursWorked: e.hoursWorked})
+      handleTimePerWeekChange: function(e) {
+          this.state.settings.setTimePerWeek(e.timePerWeek);
+
+          this.setState({
+              timePerWeek: e.timePerWeek,
+              timeWorked: e.timeWorked,
+              timeNecessary: this.props.settings.getTimeNecessaryToNow(),
+              timeExtraToNow: this.props.settings.getTimeExtraToNow()});
+
       },
       componentDidMount: function() {
       },
-      render: function(){
+      render: function() {
         return (
             <div>
                 <h1>Zeiterfassung</h1>
-
-                <Graph hoursPerWeek={this.state.hoursPerWeek} hoursWorked={this.state.hoursWorked} />
-                <Table />
-                <Settings hoursPerWeek={this.state.hoursPerWeek} hoursWorked={this.state.hoursWorked} onHoursPerWeekChange={this.handleHoursPerWeekChange} />
+                <Graph timeNecessary={this.state.timeNecessary} timeExtraToNow={this.state.timeExtraToNow} timeWorked={this.state.timeWorked} />
+                <Table timeNecessary={this.state.timeNecessary} timeExtraToNow={this.state.timeExtraToNow} timePerWeek={this.state.timePerWeek} timeWorked={this.state.timeWorked} />
+                <Settings timePerWeek={this.state.timePerWeek} timeWorked={this.state.timeWorked} onTimePerWeekChange={this.handleTimePerWeekChange} />
             </div>
         )
       }
