@@ -17,9 +17,6 @@ require([
     'src/services/SettingsRepository'
     ], function(React, Application, SettingsRepository) {
 
-    SettingsRepository.timeElement = document.createElement('div');
-    SettingsRepository.timeElement.innerHTML = '40';
-
     Application = React.createFactory(Application);
     React.render(Application({
             settings: SettingsRepository

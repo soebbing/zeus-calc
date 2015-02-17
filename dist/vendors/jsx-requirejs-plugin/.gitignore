@@ -1,0 +1,4 @@
+*.swp
+*.swo
+tags
+build_js

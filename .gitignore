@@ -1,2 +1,5 @@
 .idea
 *.iml
+build.txt
+npm_modules
+npm_modules
