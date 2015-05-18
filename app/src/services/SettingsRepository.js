@@ -7,17 +7,48 @@ define(
         // Das HTML-Element in dem die gearbeitete Zeit steht
         timeElement: null,
 
+        /** @var {HTMLElement|null} Das HTML-Element in das die Applikation gerendert wird. */
+        targetElement: null,
+
+        /** @var {string} ID des Elements in der die Applikation gerendert wird */
+        targetElementId: 'zeus-reporting',
+
         // Das LocalStorage-Prefix
         localStoragePrefix: 'settings-',
+
+        /**
+         * Erzeugt das Element in das die Applikation gerendert wird.
+         * @returns {Element}
+         */
+        getTargetElement: function() {
+            if (!this.targetElement) {
+                var frame = this.getDocument();
+                if (!frame.getElementById(this.targetElementId)) {
+                    this.targetElement = frame.createElement('div');
+                    this.targetElement.id = this.targetElementId;
+                } else {
+                    this.targetElement = frame.getElementById(this.targetElementId);
+                }
+            }
+
+            return this.targetElement;
+        },
+
+        /**
+         * @returns {HTMLDocument}
+         */
+        getDocument: function() {
+            var frame = document.getElementById('FmeContent'); // ID des Frames mit der Zeit
+            return frame.contentWindow.document;
+        },
 
         /**
          * Eine Funktion die das Element mit der gearbeiteten Zeit zurück gibt.
          *
          * @returns {Element}
          */
-        'getTimeElement': function() {
-            var frame = document.getElementById('FmeContent'); // ID des Frames mit der Zeit
-            var frameDocument = frame.contentWindow.document;
+        getTimeElement: function() {
+            var frameDocument = this.getDocument();
             return frameDocument.getElementsByClassName('Line')[2];
         },
 
@@ -26,7 +57,7 @@ define(
          *
          * @returns {number}
          */
-        'getTimeWorked': function() {
+        getTimeWorked: function() {
             var timeElement = this.timeElement || this.getTimeElement();
             return Time.timeToFloat(timeElement.innerHTML);
         },

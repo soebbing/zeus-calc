@@ -21,3 +21,10 @@ Neben der Wochenarbeitszeit erscheint dann ein neuer Wert der die Zeitdifferenz 
 - Rot: (negativer Wert) Solange musst Du noch arbeiten um 8h/Tag voll zu haben.
 - Orange: Du hast das Soll (8h/Tag) erfüllt, es reicht aber noch nicht um Freitag rechtzeitig zu gehen.
 - Grün: Glückwunsch! Du kannst Freitag um 14 Uhr Feierabend machen!
+
+## Entwicklung
+
+Um das Javascript zu bauen führe folgendes auf der Konsole aus
+
+    bower install
+    r.js -o build.js

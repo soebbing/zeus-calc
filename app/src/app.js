@@ -21,7 +21,7 @@ require([
     React.render(Application({
             settings: SettingsRepository
         }
-    ), document.getElementById('app'));
+    ), createTargetElement(SettingsRepository));
 
     loadStyles();
 });
@@ -32,4 +32,16 @@ function loadStyles() {
     css.href = 'https://rawgit.com/soebbing/zeus-calc/react/app/css/app.css';
 
     document.getElementsByTagName('head')[0].appendChild(css);
+}
+
+/**
+ *
+ * @param SettingsRepository
+ * @returns {HTMLElement}
+ */
+function createTargetElement(SettingsRepository) {
+    var target = SettingsRepository.getTargetElement();
+    var frame = SettingsRepository.getDocument();
+    frame.getElementsByTagName('body')[0].appendChild(target);
+    return target;
 }
