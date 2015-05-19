@@ -32,7 +32,7 @@ require([
 function loadStyles(SettingsRepository) {
     var css = document.createElement('link');
     css.rel = 'stylesheet';
-    css.href = 'https://rawgit.com/soebbing/zeus-calc/react/app/css/app.css';
+    css.href = 'https://rawgit.com/soebbing/zeus-calc/master/app/css/app.css';
 
     var frame = SettingsRepository.getDocument();
     frame.getElementsByTagName('head')[0].appendChild(css);
