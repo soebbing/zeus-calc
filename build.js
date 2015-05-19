@@ -14,7 +14,7 @@
     baseUrl : 'app',
     out: 'dist/app.min.js',
     keepBuildDir: false,
-    optimize: 'none',
+    optimize: 'uglify',
     removeCombined: true,
     findNestedDependencies: true,
     include: ['requirejs', 'react', 'app', 'src/services/Time']

@@ -27,7 +27,7 @@
     transition: width 2000ms;
 }
 #zeus-reporting .progressbar-container .message {
-    width: 350px;
+    width: 400px;
     text-align: center;
 }
 #zeus-reporting .comment {
@@ -49,7 +49,10 @@
 }
 #zeus-reporting .settings label {
     display:block;
+    margin: 10px 0;
 }
 #zeus-reporting .settings input {
-    width: 50px;
+    width: 16px;
+    margin: 0 10px 0 0;
+    padding: 1px 5px;
 }

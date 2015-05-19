@@ -35,7 +35,7 @@ define([
           // <Table timeNecessary={this.state.timeNecessary} timeExtraToNow={this.state.timeExtraToNow} timePerWeek={this.state.timePerWeek} timeWorked={this.state.timeWorked} />
         return (
             <div>
-                <h1>Feierabendvorhersage (🍺)</h1>
+                <h1>🍺 Feierabendvorhersage</h1>
                 <Graph timeNecessary={this.state.timeNecessary} timeExtraToNow={this.state.timeExtraToNow} timeWorked={this.state.timeWorked} />
                 <Settings timePerWeek={this.state.timePerWeek} timeWorked={this.state.timeWorked} onTimePerWeekChange={this.handleTimePerWeekChange} />
             </div>
