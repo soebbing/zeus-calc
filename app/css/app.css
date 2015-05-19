@@ -10,7 +10,7 @@
     width: 100%;
     height: 100%;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 5px 20px 10px 20px;
     border: 1px solid black;
     background-color: #eee;
     border-radius: 3px;
@@ -39,7 +39,7 @@
     margin: 5px 0;
 }
 #zeus-reporting .settings-wrapper {
-    margin: 10px 0 0;
+    margin: 10px 0;
 }
 
 #zeus-reporting .settings-switch {
