@@ -11,7 +11,7 @@ define([
                 var timeLeft = this.props.timeNecessary-this.props.timeWorked;
                 var currentTime = Time.timeToFloat(new Date().getHours() + '.' + new Date().getMinutes());
 
-                message = '🍺: '+ Time.floatToTime(currentTime + timeLeft) + ' Uhr (noch ' + Time.floatToTime(this.props.timeNecessary-this.props.timeWorked) + 'h)';
+                message = '🍺 '+ Time.floatToTime(currentTime + timeLeft) + ' Uhr (noch ' + Time.floatToTime(this.props.timeNecessary-this.props.timeWorked) + 'h)';
             }
 
             if (this.props.timeWorked >= this.props.timeNecessary
@@ -20,7 +20,7 @@ define([
                 var timeLeft = this.props.timeNecessary-this.props.timeExtraToNow;
                 var currentTime = Time.timeToFloat(new Date().getHours() + '.' + new Date().getMinutes());
 
-                message = '🍺: '+ Time.floatToTime(currentTime + timeLeft) + ' Uhr (noch ' + Time.floatToTime((this.props.timeNecessary + this.props.timeExtraToNow) - this.props.timeWorked) + 'h)';
+                message = '🍺 '+ Time.floatToTime(currentTime + timeLeft) + ' Uhr (noch ' + Time.floatToTime((this.props.timeNecessary + this.props.timeExtraToNow) - this.props.timeWorked) + 'h)';
             }
 
             if (this.props.timeWorked >= this.props.timeNecessary + this.props.timeExtraToNow) {

@@ -5,10 +5,6 @@ define([
     'jsx!src/components/Table',
     'jsx!src/components/Settings'
     ], function(React, Graph, Table, Settings) {
-    Graph    = React.createFactory(Graph);
-    Table    = React.createFactory(Table);
-    Settings = React.createFactory(Settings);
-
     var Application = React.createClass({
       getInitialState: function(){
         return {
