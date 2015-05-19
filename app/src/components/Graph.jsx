@@ -33,15 +33,13 @@ define(['react',
 
             var style = {
                 backgroundColor: this.props.color || color,
-                width: completed + '%',
-                transition: "width 1000ms",
-                height: 20
+                width: completed + '%'
             };
 
             return (
                 <div className="progressbar-container">
                     <div className="progressbar-progress" style={style}>
-                        {this.props.timeWorked}h/{this.props.timeNecessary+this.props.timeExtraToNow}
+                        {this.props.timeWorked}h/{this.props.timeNecessary+this.props.timeExtraToNow}h
                     </div>
                 </div>
             );

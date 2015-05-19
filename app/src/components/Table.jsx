@@ -22,8 +22,8 @@ define([
             }
 
             return (
-                <div>
-                {message}
+                <div className="comment">
+                    {message}
                 </div>
                 )
         }

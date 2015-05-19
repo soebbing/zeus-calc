@@ -23,15 +23,19 @@ require([
         }
     ), createTargetElement(SettingsRepository));
 
-    loadStyles();
+    loadStyles(SettingsRepository);
 });
 
-function loadStyles() {
+/**
+ * @param SettingsRepository
+ */
+function loadStyles(SettingsRepository) {
     var css = document.createElement('link');
     css.rel = 'stylesheet';
     css.href = 'https://rawgit.com/soebbing/zeus-calc/react/app/css/app.css';
 
-    document.getElementsByTagName('head')[0].appendChild(css);
+    var frame = SettingsRepository.getDocument();
+    frame.getElementsByTagName('head')[0].appendChild(css);
 }
 
 /**
