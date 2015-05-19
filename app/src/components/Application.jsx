@@ -32,11 +32,11 @@ define([
       componentDidMount: function() {
       },
       render: function() {
+          // <Table timeNecessary={this.state.timeNecessary} timeExtraToNow={this.state.timeExtraToNow} timePerWeek={this.state.timePerWeek} timeWorked={this.state.timeWorked} />
         return (
             <div>
-                <h1>Zeiterfassung</h1>
+                <h1>Feierabendvorhersage (🍺)</h1>
                 <Graph timeNecessary={this.state.timeNecessary} timeExtraToNow={this.state.timeExtraToNow} timeWorked={this.state.timeWorked} />
-                <Table timeNecessary={this.state.timeNecessary} timeExtraToNow={this.state.timeExtraToNow} timePerWeek={this.state.timePerWeek} timeWorked={this.state.timeWorked} />
                 <Settings timePerWeek={this.state.timePerWeek} timeWorked={this.state.timeWorked} onTimePerWeekChange={this.handleTimePerWeekChange} />
             </div>
         )

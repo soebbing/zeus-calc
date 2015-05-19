@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 define(['react',
-    'src/services/Time'], function(React, Time) {
+    'jsx!src/components/Message',
+    'src/services/Time'], function(React, Message, Time) {
 
     var Graph = React.createClass({
 
@@ -38,8 +39,8 @@ define(['react',
 
             return (
                 <div className="progressbar-container">
-                    <div className="progressbar-progress" style={style}>
-                        {this.props.timeWorked}h/{this.props.timeNecessary+this.props.timeExtraToNow}h
+                    <div className="progressbar-progress" style={style} title="Nötig {this.props.timeNecessary+this.props.timeExtraToNow}">
+                        <Message timeNecessary={this.props.timeNecessary} timeExtraToNow={this.props.timeExtraToNow} timeWorked={this.props.timeWorked} />
                     </div>
                 </div>
             );

@@ -14,11 +14,11 @@ define([
             if (this.props.timeWorked >= this.props.timeNecessary
                 && this.props.timeWorked >= this.props.timeNecessary
                 && this.props.timeWorked < this.props.timeNecessary + this.props.timeExtraToNow) {
-                message = 'Ok, noch ' + Time.floatToTime((this.props.timeNecessary +  this.props.timeExtraToNow) -this.props.timeWorked) + 'h bis Feierabend. ^^';
+                message = 'Ok, noch ' + Time.floatToTime((this.props.timeNecessary + this.props.timeExtraToNow) - this.props.timeWorked) + 'h bis Feierabend. ^^';
             }
 
             if (this.props.timeWorked >= this.props.timeNecessary + this.props.timeExtraToNow) {
-                message = 'Woah, schon mehr als nötig! (' + Time.floatToTime(Math.abs((this.props.timeNecessary + this.props.timeExtraToNow) -this.props.timeWorked)) + 'h)';
+                message = 'Woah, schon mehr als nötig! (' + Time.floatToTime(Math.abs((this.props.timeNecessary + this.props.timeExtraToNow) - this.props.timeWorked)) + 'h)';
             }
 
             return (

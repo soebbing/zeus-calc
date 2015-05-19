@@ -9,9 +9,8 @@ define(['react'], function(React) {
         },
 
         onChange: function() {
-            var timeWorked = this.refs.timeWorked.getDOMNode().value.trim();
             var newTimePerWeek = parseFloat(this.refs.timePerWeek.getDOMNode().value.trim());
-            this.props.onTimePerWeekChange({timePerWeek: newTimePerWeek, timeWorked: timeWorked});
+            this.props.onTimePerWeekChange({timePerWeek: newTimePerWeek, timeWorked: this.props.timeWorked});
         },
 
         /**
@@ -44,12 +43,8 @@ define(['react'], function(React) {
                     <div className={buttonClasses} ref="settingsButton" onClick={this.onSettingsClick}>Einstellungen</div>
                     <div className="settings" className={panelClasses} ref="settingsPanel">
                         <label>
-                            Geleistete Stunden
-                            <input type="text" maxLength="5" value={this.props.timeWorked} ref="timeWorked" placeholder="Geleistete Stunden" onChange={this.onChange} />
-                        </label>
-
-                        <label>Wochenstunden
                             <input type="text" maxLength="5" value={this.props.timePerWeek} ref="timePerWeek" placeholder="Stunden pro Woche" onChange={this.onChange} />
+                            Wochenstunden
                         </label>
                     </div>
                 </div>

@@ -4,7 +4,7 @@
     height: 170px;
     margin: 0 auto;
     top: 30%;
-    left: 30%;
+    left: 35%;
     padding: 0 20px;
     border: 1px solid black;
     background-color: #eee;
@@ -13,10 +13,11 @@
 }
 
 #zeus-reporting .progressbar-container {
-    width: 300px;
+    width: 400px;
     height: 32px;
     color: #fff;
     border: 1px solid #ccc;
+    background-color: #ccc;
     border-radius: 3px;
 }
 
@@ -25,15 +26,24 @@
     height: 12px;
     transition: width 2000ms;
 }
+#zeus-reporting .progressbar-container .message {
+    width: 350px;
+    text-align: center;
+}
+#zeus-reporting .comment {
+    margin: 5px 0;
+}
+#zeus-reporting .settings-wrapper {
+    margin: 10px 0 0;
+}
+
 #zeus-reporting .settings-switch {
     cursor: pointer;
+    text-decoration: underline;
 }
-#zeus-reporting .settings-switch.closed {
+#zeus-reporting .settings-switch.closed {}
+#zeus-reporting .settings-switch.open {}
 
-}
-#zeus-reporting .settings-switch.open {
-
- }
 #zeus-reporting .settings.hidden {
     display:none;
 }
