@@ -7,7 +7,7 @@ pünktlich um 14 Uhr Feierabend zu machen.
 
 Erstelle ein neues Lesezeichen in Deinem Browser und hinterlege als URL den folgenden Code:
 
-    javascript:(function(){var url='https://rawgit.com/soebbing/zeus-calc/master/zeus.js';var jsCode=document.createElement('script');jsCode.setAttribute('src',url+'?'+Math.random());document.body.appendChild(jsCode);}());
+    javascript:(function(){var url='https://rawgit.com/soebbing/zeus-calc/master/dist/app.min.js';var jsCode=document.createElement('script');jsCode.setAttribute('src',url+'?'+Math.random());document.body.appendChild(jsCode);}());
 
 Du musst eventuell die JS-Datei auf einen eigenen Server legen und die URL in der "url"-Variable entsprechend anpassen.
 
@@ -28,3 +28,7 @@ Um das Javascript zu bauen führe folgendes auf der Konsole aus
 
     bower install
     r.js -o build.js
+
+## Offene Punkte
+
+* Erkennung dass das Uhrzeitelement fehlt mit entsprechender Meldung
