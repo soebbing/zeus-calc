@@ -8,9 +8,13 @@ define(['react'], function(React) {
             }
         },
 
-        onChange: function() {
+        onChangeTimePerWeek: function() {
             var newTimePerWeek = parseFloat(this.refs.timePerWeek.getDOMNode().value.trim());
             this.props.onTimePerWeekChange({timePerWeek: newTimePerWeek, timeWorked: this.props.timeWorked});
+        },
+
+        onChangeShowNotification: function() {
+            this.props.onShowNotificationChange({showNotification: this.refs.showNotification.getDOMNode().checked});
         },
 
         /**
@@ -23,7 +27,7 @@ define(['react'], function(React) {
         },
 
         componentDidMount: function() {
-            this.onChange();
+            this.onChangeTimePerWeek();
         },
 
         render: function(){
@@ -43,8 +47,12 @@ define(['react'], function(React) {
                     <div className={buttonClasses} ref="settingsButton" onClick={this.onSettingsClick}>Einstellungen</div>
                     <div className="settings" className={panelClasses} ref="settingsPanel">
                         <label>
-                            <input type="text" maxLength="5" value={this.props.timePerWeek} ref="timePerWeek" placeholder="Stunden pro Woche" onChange={this.onChange} />
+                            <input type="text" maxLength="5" value={this.props.timePerWeek} ref="timePerWeek" placeholder="Stunden pro Woche" onChange={this.onChangeTimePerWeek} />
                             Wochenstunden
+                        </label>
+                        <label>
+                            <input type="checkbox" ref="showNotification" checked={this.props.showNotification} onChange={this.onChangeShowNotification} />
+                            Feierabendbenachrichtigung
                         </label>
                     </div>
                 </div>

@@ -4,8 +4,12 @@ define(
 
     var Repo = {
 
-        // Das HTML-Element in dem die gearbeitete Zeit steht
-        timeElement: null,
+        // float-Zeitwert: Wieviel habe ich gearbeitet
+        timeWorked: null,
+
+        // Date-Objekt: Zu welchem Zeitpunkt habe ich soviel gearbeitet
+        /** @var Date */
+        timeWorkedAt: new Date(),
 
         /** @var {HTMLElement|null} Das HTML-Element in das die Applikation gerendert wird. */
         targetElement: null,
@@ -48,8 +52,14 @@ define(
          * @returns {Element}
          */
         getTimeElement: function() {
-            var frameDocument = this.getDocument();
-            return frameDocument.getElementsByClassName('Line')[2];
+            var element = null;
+            try {
+                element = this.getDocument().getElementsByClassName('Line')[2];
+            } catch(ex) {
+                throw new Exception('Time not found/Wrong formatting');
+            }
+
+            return element;
         },
 
         /**
@@ -58,8 +68,12 @@ define(
          * @returns {number}
          */
         getTimeWorked: function() {
-            var timeElement = this.timeElement || this.getTimeElement();
-            return Time.timeToFloat(timeElement.innerHTML);
+            if (!this.timeWorked) {
+                this.timeWorkedAt = new Date();
+                this.timeWorked = Time.timeToFloat(this.getTimeElement().innerHTML);
+            }
+
+            return this.timeWorked + (new Date().getTime() - this.timeWorkedAt.getTime()) / 1000 / 60 / 60;
         },
 
         /**
@@ -85,7 +99,7 @@ define(
          *
          * @returns {number}
          */
-        getTimeNecessaryToNow: function() {
+        getTimeNecessaryToToday: function() {
             var dayOfWeek = new Date().getDay();
             return dayOfWeek * this.getTimePerWeek()/5;
         },
@@ -95,7 +109,7 @@ define(
          *
          * @returns {number}
          */
-        getTimeExtraToNow: function() {
+        getTimeExtraToToday: function() {
             var timeExtraPerDay = ((this.getTimePerWeek()-5.5) / 4) - (this.getTimePerWeek()/5); // Soviel Zeit muss pro Tag vorgearbeitet werden
             var timeExtraToNow = timeExtraPerDay * new Date().getDay(); // Soviel Zeit muss bis zum aktuellen Wochentag vorgearbeitet werden
             if (new Date().getDay() == 5) { // Am Freitag müssen wir nicht mehr vorarbeiten
@@ -115,6 +129,30 @@ define(
                 timePerWeek = 0;
             }
             localStorage.setItem(this.localStoragePrefix + 'timePerWeek', timePerWeek);
+        },
+
+        /**
+         * Speichert ob eine Notification angezeigt werden soll.
+         *
+         * @param {number} showNotification
+         */
+        setShowNotification: function(showNotification) {
+            localStorage.setItem(this.localStoragePrefix + 'showNotification', showNotification);
+        },
+
+        /**
+         * Liefert ob der Nutzer wünscht dass eine Notification zum Feierabend angezeigt werden soll.
+         *
+         * @returns {boolean}
+         */
+        getShowNotification: function() {
+            var showNotification = localStorage.getItem(this.localStoragePrefix + 'showNotification');
+
+            if (showNotification === null) {
+                showNotification = false;
+            }
+
+            return showNotification && 'Notification' in window && Notification.permission !== 'denied';
         }
     };
 
