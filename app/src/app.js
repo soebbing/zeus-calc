@@ -17,6 +17,13 @@ require([
     'src/services/SettingsRepository'
     ], function(React, Application, SettingsRepository) {
 
+    try { // Wir checken einmal ob wir auf der richtigen Seite sind...
+        SettingsRepository.getTimeWorked()
+    } catch(ex) {
+        alert(ex.message);
+        return;
+    }
+
     Application = React.createFactory(Application);
     React.render(Application({
             settings: SettingsRepository

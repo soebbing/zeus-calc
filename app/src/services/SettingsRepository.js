@@ -52,14 +52,15 @@ define(
          * @returns {Element}
          */
         getTimeElement: function() {
-            var element = null;
-            try {
-                element = this.getDocument().getElementsByClassName('Line')[2];
-            } catch(ex) {
-                throw new Exception('Time not found/Wrong formatting');
+            var doc = this.getDocument();
+            if (!doc) {
+                throw new Error('Uhrzeit nicht gefunden. Falsche Seite?')
             }
-
-            return element;
+            var lines = doc.getElementsByClassName('Line');
+            if (lines.length < 3) {
+                throw new Error('Uhrzeit nicht gefunden. Falsche Seite?')
+            }
+            return lines[2]
         },
 
         /**
