@@ -14,13 +14,19 @@ Du musst eventuell die JS-Datei auf einen eigenen Server legen und die URL in de
 ## Anwendung
 
 Um nun zu schauen ob Du für heute genug gearbeitet hast logge Dich in die Zeiterfassung ein, klicke auf "Stunden pro Woche"
-und rufe Dein Lesezeichen auf.
+und rufe Dein Lesezeichen auf. Es erscheint nun ein Balken mit Deinem Wochenarbeitszeitstatus:
 
-Neben der Wochenarbeitszeit erscheint dann ein neuer Wert der die Zeitdifferenz zur zum heutigen Wochentag nötigen Arbeitszeit darstellt.
+- Rot: (negativer Wert) Die voraussichtliche Uhrzeit für den Feierabend (inkl. der für Freitag nötigen Zeit) wird angezeigt,
+zusammen mit der heut mindestens noch zu leistenden Arbeitszeit (8h/Tag).
+- Orange: Du hast das Soll (8h/Tag) erfüllt, es reicht aber noch nicht um Freitag rechtzeitig zu gehen. Die Uhrzeit für
+den Feierabend und die noch fehlende Zeit wird Dir angezeigt.
+- Grün: Glückwunsch! Du kannst Freitag um 14 Uhr Feierabend machen! Es wird die "überschüssige" Zeit angezeigt.
 
-- Rot: (negativer Wert) Solange musst Du noch arbeiten um 8h/Tag voll zu haben.
-- Orange: Du hast das Soll (8h/Tag) erfüllt, es reicht aber noch nicht um Freitag rechtzeitig zu gehen.
-- Grün: Glückwunsch! Du kannst Freitag um 14 Uhr Feierabend machen!
+Die Werte werden fortlaufend aktualisiert, es ist also nicht nötig die Seite neu zu laden.
+
+## Einstellungen
+
+Hier können die Wochenarbeitszeit eingestellt und eine optionale Benachrichtigung zum Feierabend aktiviert werden.
 
 ## Entwicklung
 
@@ -28,7 +34,3 @@ Um das Javascript zu bauen führe folgendes auf der Konsole aus
 
     bower install
     r.js -o build.js
-
-## Offene Punkte
-
-* Erkennung dass das Uhrzeitelement fehlt mit entsprechender Meldung
