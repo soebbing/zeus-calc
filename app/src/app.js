@@ -24,11 +24,13 @@ require([
         return;
     }
 
+    // ZEUS versucht die Seite nach einer Weile auf die Logout-URL weiterzuleiten, das verhindern wir.
+    window.clearTimeout(window['objWinTimeout'] || null);
+
     Application = React.createFactory(Application);
     React.render(Application({
-            settings: SettingsRepository
-        }
-    ), createTargetElement(SettingsRepository));
+        settings: SettingsRepository
+    }), createTargetElement(SettingsRepository));
 
     loadStyles(SettingsRepository);
 });
