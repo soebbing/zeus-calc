@@ -11,6 +11,7 @@ define([
             return {
                 notificationShownInSession: false,
                 settings: this.props.settings,
+                fridayWorktime: this.props.settings.getFridayWorktime(),
                 showNotification: this.props.settings.getShowNotification(),
                 timeNecessary: this.props.settings.getTimeNecessaryToToday(),
                 timeExtraToNow: this.props.settings.getTimeExtraToToday(),
@@ -48,6 +49,7 @@ define([
 
         /**
          * Aktualisiert die Attribute wenn sich das Feld "TimePerWeek" geändert hat.
+         *
          * @param {Event} e
          */
         handleTimePerWeekChange: function (e) {
@@ -61,6 +63,26 @@ define([
             });
         },
 
+        /**
+         *
+         * @param {Event} e
+         */
+        handleFridayWorktimeChange: function(e) {
+            this.state.settings.setFridayWorktime(e.fridayWorktime);
+
+            this.setState({
+                fridayWorktime: this.props.settings.getFridayWorktime(),
+                timePerWeek: this.props.settings.getTimePerWeek(),
+                timeWorked: this.props.settings.getTimeWorked(),
+                timeNecessary: this.props.settings.getTimeNecessaryToToday(),
+                timeExtraToNow: this.props.settings.getTimeExtraToToday()
+            });
+        },
+
+        /**
+         *
+         * @param {Event} e
+         */
         handleShowNotificationChange: function(e) {
             if (e.showNotification) {
                 if (!('Notification' in window)) {
@@ -101,6 +123,8 @@ define([
                     <Graph timeNecessary={this.state.timeNecessary} timeExtraToNow={this.state.timeExtraToNow} timeWorked={this.state.timeWorked} />
                     <Settings timePerWeek={this.state.timePerWeek}
                         timeWorked={this.state.timeWorked}
+                        fridayWorktime={this.state.fridayWorktime}
+                        onFridayWorktimeChange={this.handleFridayWorktimeChange}
                         onTimePerWeekChange={this.handleTimePerWeekChange}
                         showNotification={this.state.showNotification}
                         onShowNotificationChange={this.handleShowNotificationChange} />

@@ -10,7 +10,18 @@ define(['react'], function(React) {
 
         onChangeTimePerWeek: function() {
             var newTimePerWeek = parseFloat(this.refs.timePerWeek.getDOMNode().value.trim());
-            this.props.onTimePerWeekChange({timePerWeek: newTimePerWeek, timeWorked: this.props.timeWorked});
+            this.props.onTimePerWeekChange({
+                timePerWeek: newTimePerWeek,
+                timeWorked: this.props.timeWorked
+            });
+        },
+
+        onChangeFridayWorktime: function() {
+            var newFridayWorktime = this.refs.fridayWorktime.getDOMNode().value.trim();
+
+            newFridayWorktime = newFridayWorktime.replace(/,/g, '.');
+
+            this.props.onFridayWorktimeChange({fridayWorktime: newFridayWorktime});
         },
 
         onChangeShowNotification: function() {
@@ -49,6 +60,10 @@ define(['react'], function(React) {
                         <label>
                             <input type="text" maxLength="5" value={this.props.timePerWeek} ref="timePerWeek" placeholder="Stunden pro Woche" onChange={this.onChangeTimePerWeek} />
                             Wochenstunden
+                        </label>
+                        <label>
+                            <input type="text" maxLength="5" value={this.props.fridayWorktime} ref="fridayWorktime" placeholder="Arbeitsdauer am Freitag" onChange={this.onChangeFridayWorktime} />
+                            Arbeitsdauer am Freitag in Stunden (8-14 Uhr: 5,5h)
                         </label>
                         <label>
                             <input type="checkbox" ref="showNotification" checked={this.props.showNotification} onChange={this.onChangeShowNotification} />

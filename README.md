@@ -1,7 +1,7 @@
 # Zeus Arbeitszeitrechner
 
 Dieses Bookmarklet berechnet die zu leistende/geleistete Arbeitszeit (auf Wochenbasis) die nötig ist, um am Freitag
-pünktlich um 14 Uhr Feierabend zu machen.
+pünktlich um 14 Uhr (oder wann auch immer Du schaffst) Feierabend zu machen.
 
 ## Installation
 

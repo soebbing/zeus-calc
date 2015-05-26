@@ -111,13 +111,41 @@ define(
          * @returns {number}
          */
         getTimeExtraToToday: function() {
-            var timeExtraPerDay = ((this.getTimePerWeek()-5.5) / 4) - (this.getTimePerWeek()/5); // Soviel Zeit muss pro Tag vorgearbeitet werden
+            var timeExtraPerDay = ((this.getTimePerWeek()-this.getFridayWorktime()) / 4) - (this.getTimePerWeek()/5); // Soviel Zeit muss pro Tag vorgearbeitet werden
             var timeExtraToNow = timeExtraPerDay * new Date().getDay(); // Soviel Zeit muss bis zum aktuellen Wochentag vorgearbeitet werden
             if (new Date().getDay() == 5) { // Am Freitag müssen wir nicht mehr vorarbeiten
                 timeExtraToNow = 0;
             }
 
             return timeExtraToNow;
+        },
+
+        /**
+         * Liefert die Arbeitsdauer die man am Freitag investieren will.
+         *
+         * @returns {number}
+         */
+        getFridayWorktime: function() {
+            var fridayWorktime = localStorage.getItem(this.localStoragePrefix + 'fridayWorktime');
+
+            if (fridayWorktime === null) {
+                window.console.log("Returning default 5.5.");
+                fridayWorktime = 5.5;
+            }
+
+            return fridayWorktime;
+        },
+
+        /**
+         * Speichert die Arbeitsdauer die man am Freitag investieren will im localstorage.
+         *
+         * @param {number} fridayWorktime
+         */
+        setFridayWorktime: function(fridayWorktime) {
+            if (isNaN(fridayWorktime)) {
+                fridayWorktime = 5.5;
+            }
+            localStorage.setItem(this.localStoragePrefix + 'fridayWorktime', fridayWorktime);
         },
 
         /**

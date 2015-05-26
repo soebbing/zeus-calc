@@ -28,7 +28,7 @@
 #zeus-reporting .progressbar-progress {
     padding: 10px 0;
     height: 12px;
-    transition: width 2000ms;
+    transition: width 1500ms;
 }
 #zeus-reporting .progressbar-container .message {
     width: 400px;
@@ -56,7 +56,7 @@
     margin: 10px 0;
 }
 #zeus-reporting .settings input {
-    width: 16px;
+    width: 20px;
     margin: 0 10px 0 0;
     padding: 1px 5px;
 }
