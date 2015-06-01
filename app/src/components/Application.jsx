@@ -11,6 +11,7 @@ define([
             return {
                 notificationShownInSession: false,
                 settings: this.props.settings,
+                useBreakAutomation: this.props.settings.getUseBreakAutomation(),
                 fridayWorktime: this.props.settings.getFridayWorktime(),
                 showNotification: this.props.settings.getShowNotification(),
                 timeNecessary: this.props.settings.getTimeNecessaryToToday(),
@@ -83,6 +84,24 @@ define([
          *
          * @param {Event} e
          */
+        handleUseBreakAutomationChange: function(e) {
+            window.console.log("Application", e.useBreakAutomation);
+            this.state.settings.setUseBreakAutomation(e.useBreakAutomation);
+
+            this.setState({
+                useBreakAutomation: this.props.settings.getUseBreakAutomation(),
+                fridayWorktime: this.props.settings.getFridayWorktime(),
+                timePerWeek: this.props.settings.getTimePerWeek(),
+                timeWorked: this.props.settings.getTimeWorked(),
+                timeNecessary: this.props.settings.getTimeNecessaryToToday(),
+                timeExtraToNow: this.props.settings.getTimeExtraToToday()
+            });
+        },
+
+        /**
+         *
+         * @param {Event} e
+         */
         handleShowNotificationChange: function(e) {
             if (e.showNotification) {
                 if (!('Notification' in window)) {
@@ -128,7 +147,9 @@ define([
                         onFridayWorktimeChange={this.handleFridayWorktimeChange}
                         onTimePerWeekChange={this.handleTimePerWeekChange}
                         showNotification={this.state.showNotification}
-                        onShowNotificationChange={this.handleShowNotificationChange} />
+                        onShowNotificationChange={this.handleShowNotificationChange}
+                        useBreakAutomation={this.state.useBreakAutomation}
+                        onUseBreakAutomationChange={this.handleUseBreakAutomationChange} />
                 </div>
             )
         }

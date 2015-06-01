@@ -28,6 +28,10 @@ define(['react'], function(React) {
             this.props.onShowNotificationChange({showNotification: this.refs.showNotification.getDOMNode().checked});
         },
 
+        onChangeUseBreakAutomation: function() {
+            this.props.onUseBreakAutomationChange({useBreakAutomation: this.refs.useBreakAutomation.getDOMNode().checked});
+        },
+
         /**
          * OnClick-Handler für den Settings-Link
          */
@@ -53,6 +57,11 @@ define(['react'], function(React) {
                 'hidden': !this.state.visible
             });
 
+            // Nach 14 Uhr sollten die Pausen eh schon genommen worden sein, dann ist der Automat überflüssig
+            var useBreakAutomationClasses = cx({
+                'disabled': !(new Date().getHours() < 14)
+            });
+
             return (
                 <div className="settings-wrapper">
                     <div className={buttonClasses} ref="settingsButton" onClick={this.onSettingsClick}>Einstellungen</div>
@@ -68,6 +77,10 @@ define(['react'], function(React) {
                         <label>
                             <input type="checkbox" ref="showNotification" checked={this.props.showNotification} onChange={this.onChangeShowNotification} />
                             Feierabendbenachrichtigung
+                        </label>
+                        <label className={useBreakAutomationClasses}>
+                            <input type="checkbox" ref="useBreakAutomation" checked={this.props.useBreakAutomation} onChange={this.onChangeUseBreakAutomation} />
+                            Pausenautomat <small>(Spätere Frühstücks- und Mittagspausen einrechnen)</small>
                         </label>
                     </div>
                 </div>

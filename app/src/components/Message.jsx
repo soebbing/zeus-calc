@@ -10,7 +10,7 @@ define([
             var numberOfWorkDaysInWeek = Time.getNumberOfWorkDaysInWeek();
 
             if (numberOfWorkDaysInWeek < 5) {
-                message = '(' + (5 - numberOfWorkDaysInWeek) + ' Ferientag' + (numberOfWorkDaysInWeek < 4 ? 'e' : '') + '  berücksichtigt)'
+                message = '(' + (5 - numberOfWorkDaysInWeek) + ' Feiertag' + (numberOfWorkDaysInWeek < 4 ? 'e' : '') + '  berücksichtigt)'
             }
 
             return (

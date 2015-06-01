@@ -5,15 +5,19 @@ define(
     var Repo = {
 
         // Der Stand von wann die Arbeitszeitinformationen sind
-        /** @var Date */
+        /** @var {Date} */
         timeState: new Date(),
 
         // float-Zeitwert: Wieviel habe ich gearbeitet
         timeWorked: null,
 
         // Date-Objekt: Zu welchem Zeitpunkt habe ich soviel gearbeitet
-        /** @var Date */
+        /** @var {Date} */
         timeWorkedAt: new Date(),
+
+        // Definiert ob das System versuchen soll Pausenzeiten automatisch in die Berechnungen einzubeziehen
+        /** @var {boolean} */
+        useBreakAutomation: true,
 
         /** @var {HTMLElement|null} Das HTML-Element in das die Applikation gerendert wird. */
         targetElement: null,
@@ -201,6 +205,14 @@ define(
             }
 
             return showNotification && 'Notification' in window && Notification.permission !== 'denied';
+        },
+
+        getUseBreakAutomation: function() {
+            return this.useBreakAutomation;
+        },
+
+        setUseBreakAutomation: function(useBreak) {
+            this.useBreakAutomation = useBreak;
         }
     };
 
