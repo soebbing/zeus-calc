@@ -4,6 +4,10 @@ define(
 
     var Repo = {
 
+        // Der Stand von wann die Arbeitszeitinformationen sind
+        /** @var Date */
+        timeState: new Date(),
+
         // float-Zeitwert: Wieviel habe ich gearbeitet
         timeWorked: null,
 
@@ -102,7 +106,20 @@ define(
          */
         getTimeNecessaryToToday: function() {
             var dayOfWeek = new Date().getDay();
-            return dayOfWeek * this.getTimePerWeek()/5;
+            var timeNecessary = dayOfWeek * this.getTimePerWeek() / 5;
+
+            if (this.timeState.getDay() < 5) { // Bei allen Wochentagen vor Freitag rechnen wir noch die Pausen drauf
+                if (this.timeState.getHours() < 10) {
+                    timeNecessary += 0.75;
+                }
+                if (this.timeState.getHours() < 14) {
+                    timeNecessary += 0.5;
+                }
+            }
+            if (this.timeState.getDay() == 5 && this.timeState.getHours() < 10) { // Bei allen Wochentagen vor Freitag rechnen wir noch die Pausen drauf
+                timeNecessary += 0.5;
+            }
+            return timeNecessary;
         },
 
         /**
@@ -111,8 +128,11 @@ define(
          * @returns {number}
          */
         getTimeExtraToToday: function() {
-            var timeExtraPerDay = ((this.getTimePerWeek()-this.getFridayWorktime()) / 4) - (this.getTimePerWeek()/5); // Soviel Zeit muss pro Tag vorgearbeitet werden
+            var weekDays = Time.getNumberOfWorkDaysInWeek();
+            var timeExtraPerDay = ((this.getTimePerWeek()-this.getFridayWorktime()) / (weekDays-1)) - (this.getTimePerWeek()/weekDays); // Soviel Zeit muss pro Tag vorgearbeitet werden
+
             var timeExtraToNow = timeExtraPerDay * new Date().getDay(); // Soviel Zeit muss bis zum aktuellen Wochentag vorgearbeitet werden
+
             if (new Date().getDay() == 5) { // Am Freitag müssen wir nicht mehr vorarbeiten
                 timeExtraToNow = 0;
             }
@@ -129,7 +149,6 @@ define(
             var fridayWorktime = localStorage.getItem(this.localStoragePrefix + 'fridayWorktime');
 
             if (fridayWorktime === null) {
-                window.console.log("Returning default 5.5.");
                 fridayWorktime = 5.5;
             }
 

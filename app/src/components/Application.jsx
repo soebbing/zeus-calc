@@ -3,9 +3,9 @@ define([
     'react',
     'src/services/Time',
     'jsx!src/components/Graph',
-    'jsx!src/components/Table',
+    'jsx!src/components/Message',
     'jsx!src/components/Settings'
-], function (React, Time, Graph, Table, Settings) {
+], function (React, Time, Graph, Message, Settings) {
     var Application = React.createClass({
         getInitialState: function () {
             return {
@@ -121,6 +121,7 @@ define([
                 <div className="zeus-reporting-wrapper">
                     <h1>🍺 Feierabendvorhersage</h1>
                     <Graph timeNecessary={this.state.timeNecessary} timeExtraToNow={this.state.timeExtraToNow} timeWorked={this.state.timeWorked} />
+                    <Message />
                     <Settings timePerWeek={this.state.timePerWeek}
                         timeWorked={this.state.timeWorked}
                         fridayWorktime={this.state.fridayWorktime}

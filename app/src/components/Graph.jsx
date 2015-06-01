@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 define(['react',
-    'jsx!src/components/Message',
-    'src/services/Time'], function(React, Message, Time) {
+    'jsx!src/components/GraphContent',
+    'src/services/Time'], function(React, GraphContent, Time) {
 
     var Graph = React.createClass({
 
@@ -37,10 +37,13 @@ define(['react',
                 width: completed + '%'
             };
 
+            var feierabendTime = Time.floatToTime(Time.timeToFloat(new Date().getHours() + '.' + new Date().getMinutes()) + (this.props.timeNecessary - this.props.timeWorked));
+            var title = 'Nötig ' + (this.props.timeNecessary + this.props.timeExtraToNow) + 'h (normaler Feierabend: ' + feierabendTime + ' Uhr)';
+
             return (
                 <div className="progressbar-container">
-                    <div className="progressbar-progress" style={style} title="Nötig {this.props.timeNecessary+this.props.timeExtraToNow}">
-                        <Message timeNecessary={this.props.timeNecessary} timeExtraToNow={this.props.timeExtraToNow} timeWorked={this.props.timeWorked} />
+                    <div className="progressbar-progress" style={style} title={title}>
+                        <GraphContent timeNecessary={this.props.timeNecessary} timeExtraToNow={this.props.timeExtraToNow} timeWorked={this.props.timeWorked} />
                     </div>
                 </div>
             );

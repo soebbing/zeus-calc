@@ -30,12 +30,12 @@
     height: 12px;
     transition: width 1500ms;
 }
-#zeus-reporting .progressbar-container .message {
+#zeus-reporting .progressbar-container .graph-content {
     width: 400px;
     text-align: center;
 }
 #zeus-reporting .comment {
-    margin: 5px 0;
+    margin: 10px 0;
 }
 #zeus-reporting .settings-wrapper {
     margin: 10px 0;
