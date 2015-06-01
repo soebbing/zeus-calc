@@ -36,6 +36,7 @@
 }
 #zeus-reporting .comment {
     margin: 10px 0;
+    float: right;
 }
 #zeus-reporting .settings-wrapper {
     margin: 10px 0;
