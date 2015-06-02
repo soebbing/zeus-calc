@@ -112,7 +112,8 @@ define(
             var dayOfWeek = new Date().getDay();
             var timeNecessary = dayOfWeek * this.getTimePerWeek() / 5;
 
-            if (this.timeState.getDay() < 5) { // Bei allen Wochentagen vor Freitag rechnen wir noch die Pausen drauf
+            // Bei allen Wochentagen vor Freitag rechnen wir noch die Pausen drauf
+            if (this.timeState.getDay() < 5 && this.getUseBreakAutomation()) {
                 if (this.timeState.getHours() < 10) {
                     timeNecessary += 0.75;
                 }
@@ -120,9 +121,12 @@ define(
                     timeNecessary += 0.5;
                 }
             }
-            if (this.timeState.getDay() == 5 && this.timeState.getHours() < 10) { // Bei allen Wochentagen vor Freitag rechnen wir noch die Pausen drauf
+
+            // Bei allen Wochentagen vor Freitag rechnen wir noch die Pausen drauf
+            if (this.timeState.getDay() == 5 && this.timeState.getHours() < 10 && this.getUseBreakAutomation()) {
                 timeNecessary += 0.5;
             }
+
             return timeNecessary;
         },
 
