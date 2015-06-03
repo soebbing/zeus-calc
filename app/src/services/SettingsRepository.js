@@ -137,7 +137,9 @@ define(
          */
         getTimeExtraToToday: function() {
             var weekDays = Time.getNumberOfWorkDaysInWeek();
-            var timeExtraPerDay = ((this.getTimePerWeek()-this.getFridayWorktime()) / (weekDays-1)) - (this.getTimePerWeek()/weekDays); // Soviel Zeit muss pro Tag vorgearbeitet werden
+            var freeHours = (5 - weekDays) * (this.getTimePerWeek() / 5); // Arbeitszeit an Feiertagen
+            var workHoursWithoutFriday = this.getTimePerWeek() - this.getFridayWorktime();
+            var timeExtraPerDay = ((workHoursWithoutFriday - freeHours) / (weekDays-1)) - (this.getTimePerWeek() / 5); // Soviel Zeit muss pro Tag vorgearbeitet werden
 
             var timeExtraToNow = timeExtraPerDay * new Date().getDay(); // Soviel Zeit muss bis zum aktuellen Wochentag vorgearbeitet werden
 
