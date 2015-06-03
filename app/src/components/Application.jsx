@@ -87,7 +87,6 @@ define([
          * @param {Event} e
          */
         handleUseBreakAutomationChange: function(e) {
-            window.console.log("Application", e.useBreakAutomation);
             this.state.settings.setUseBreakAutomation(e.useBreakAutomation);
 
             this.setState({
