@@ -162,7 +162,7 @@ define(
                 fridayWorktime = 5.5;
             }
 
-            return fridayWorktime;
+            return parseFloat(fridayWorktime);
         },
 
         /**
@@ -208,6 +208,8 @@ define(
 
             if (showNotification === null) {
                 showNotification = false;
+            } else {
+                showNotification = showNotification !== 'false'; // Aus dem Localstorage fallen die nur als strings heraus
             }
 
             return showNotification && 'Notification' in window && Notification.permission !== 'denied';
