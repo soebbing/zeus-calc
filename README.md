@@ -24,6 +24,11 @@ den Feierabend und die noch fehlende Zeit wird Dir angezeigt.
 
 Die Werte werden fortlaufend aktualisiert, es ist also nicht nötig die Seite neu zu laden.
 
+Darüber hinaus wird der aktuelle Status auch in der Titelleiste angezeigt und im Favicon angedeutet. Damit kannst Du 
+Deine Restarbeitszeit im Blick halten ohne den entsprechenden Browsertab anzusteuern. Sogar im angehefteten (Chrome), bzw. 
+angepinnten (FF) Modus lässt sich über die Farbe des Favicons (dass der Farbe des Fortschrittsbalkens entspricht) der 
+aktuelle Stand ableiten.
+
 ## Einstellungen
 
 Hier können die Wochenarbeitszeit eingestellt und eine optionale Benachrichtigung zum Feierabend aktiviert werden.

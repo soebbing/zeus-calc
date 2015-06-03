@@ -4,8 +4,10 @@ define([
     'src/services/Time',
     'jsx!src/components/Graph',
     'jsx!src/components/Message',
-    'jsx!src/components/Settings'
-], function (React, Time, Graph, Message, Settings) {
+    'jsx!src/components/Settings',
+    'jsx!src/components/Title',
+    'jsx!src/components/Favicon'
+], function (React, Time, Graph, Message, Settings, Title, Favicon) {
     var Application = React.createClass({
         getInitialState: function () {
             return {
@@ -150,6 +152,8 @@ define([
                         onShowNotificationChange={this.handleShowNotificationChange}
                         useBreakAutomation={this.state.useBreakAutomation}
                         onUseBreakAutomationChange={this.handleUseBreakAutomationChange} />
+                    <Title timeNecessary={this.state.timeNecessary} timeExtraToNow={this.state.timeExtraToNow} timeWorked={this.state.timeWorked} />
+                    <Favicon timeNecessary={this.state.timeNecessary} timeExtraToNow={this.state.timeExtraToNow} timeWorked={this.state.timeWorked} />
                 </div>
             )
         }
