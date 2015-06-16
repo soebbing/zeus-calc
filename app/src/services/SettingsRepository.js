@@ -158,7 +158,7 @@ define(
         getFridayWorktime: function() {
             var fridayWorktime = localStorage.getItem(this.localStoragePrefix + 'fridayWorktime');
 
-            if (fridayWorktime === null) {
+            if (fridayWorktime === null || isNaN(parseFloat(fridayWorktime))) {
                 fridayWorktime = 5.5;
             }
 

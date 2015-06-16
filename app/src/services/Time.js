@@ -9,6 +9,10 @@ define([], function () {
          * @returns {string}
          */
         floatToTime: function (floatTime) {
+            if (isNaN(floatTime)) {
+                return '1:00';
+            }
+            window.console.log(floatTime);
             var parts = new Date(floatTime * 3600 * 1000).toUTCString().split(' ')[4].split(':');
             return parts[0] + ':' + parts[1];
         },

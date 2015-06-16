@@ -71,7 +71,7 @@ define(['react'], function(React) {
                             Wochenstunden
                         </label>
                         <label>
-                            <input type="text" maxLength="5" value={this.props.fridayWorktime} ref="fridayWorktime" placeholder="Arbeitsdauer am Freitag" onChange={this.onChangeFridayWorktime} />
+                            <input type="text" maxLength="5" value={this.props.fridayWorktime.toFixed(1)} ref="fridayWorktime" placeholder="Arbeitsdauer am Freitag" onChange={this.onChangeFridayWorktime} />
                             Arbeitsdauer am Freitag in Stunden (8-14 Uhr: 5,5h)
                         </label>
                         <label>
