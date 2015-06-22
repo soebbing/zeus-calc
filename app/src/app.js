@@ -32,6 +32,8 @@ require([
         settings: SettingsRepository
     }), createTargetElement(SettingsRepository));
 
+    createBackdropElement(SettingsRepository);
+
     loadStyles(SettingsRepository);
 });
 
@@ -41,7 +43,8 @@ require([
 function loadStyles(SettingsRepository) {
     var css = document.createElement('link');
     css.rel = 'stylesheet';
-    css.href = 'https://rawgit.com/soebbing/zeus-calc/master/app/css/app.css';
+    //css.href = 'https://rawgit.com/soebbing/zeus-calc/master/app/css/app.css';
+    css.href = 'https://virt.janvanderstorm.de/css/app.css';
 
     var frame = SettingsRepository.getDocument();
     frame.getElementsByTagName('head')[0].appendChild(css);
@@ -57,4 +60,11 @@ function createTargetElement(SettingsRepository) {
     var frame = SettingsRepository.getDocument();
     frame.getElementsByTagName('body')[0].appendChild(target);
     return target;
+}
+
+function createBackdropElement(SettingsRepository) {
+    var frame = SettingsRepository.getDocument();
+    var backdrop = frame.createElement('div');
+    backdrop.id = 'zeus-reporting-backdrop';
+    frame.getElementsByTagName('body')[0].appendChild(backdrop);
 }

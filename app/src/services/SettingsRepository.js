@@ -107,7 +107,9 @@ define(
                 this.timeWorked = Time.timeToFloat(this.getTimeElement().innerHTML);
             }
 
-            return this.timeWorked + (new Date().getTime() - this.timeWorkedAt.getTime()) / 1000 / 60 / 60;
+            var timeWorked = this.timeWorked + (new Date().getTime() - this.timeWorkedAt.getTime()) / 1000 / 60 / 60;
+
+            return Math.ceil(timeWorked * 1000) / 1000;
         },
 
         /**
@@ -152,7 +154,7 @@ define(
                 timeNecessary += 0.5;
             }
 
-            return timeNecessary;
+            return Math.ceil(timeNecessary * 1000) / 1000;
         },
 
         /**

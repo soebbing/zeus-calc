@@ -1,5 +1,14 @@
+#zeus-reporting-backdrop {
+    position: absolute;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.6);
+    width:100%;
+    height: 100%;
+    top: 0;
+}
 #zeus-reporting {
     position: absolute;
+    z-index: 1000;
     width: 400px;
     height:200px;
     top: 30%;
@@ -13,7 +22,7 @@
     border: 1px solid black;
     background-color: #eee;
     border-radius: 3px;
-    box-shadow: #333 0 0 20px;
+    box-shadow: #efefef 0 0 20px;
 }
 
 #zeus-reporting .progressbar-container {
