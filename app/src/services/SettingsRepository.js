@@ -3,20 +3,32 @@ define(
     function(Time) {
 
     var Repo = {
-
-        // Der Stand von wann die Arbeitszeitinformationen sind
-        /** @var {Date} */
+        /**
+         * Der Stand von wann die Arbeitszeitinformationen sind
+         *
+         * @var {Date}
+         */
         timeState: new Date(),
 
-        // float-Zeitwert: Wieviel habe ich gearbeitet
+        /**
+         * Wieviel habe ich gearbeitet
+         *
+         * @var {float}
+         */
         timeWorked: null,
 
-        // Date-Objekt: Zu welchem Zeitpunkt habe ich soviel gearbeitet
-        /** @var {Date} */
+        /**
+         * Zu welchem Zeitpunkt habe ich soviel gearbeitet
+         *
+         * @var {Date}
+         */
         timeWorkedAt: new Date(),
 
-        // Definiert ob das System versuchen soll Pausenzeiten automatisch in die Berechnungen einzubeziehen
-        /** @var {boolean} */
+        /**
+         * Definiert ob das System versuchen soll Pausenzeiten automatisch in die Berechnungen einzubeziehen
+         *
+         * @var {boolean}
+         */
         useBreakAutomation: true,
 
         /** @var {HTMLElement|null} Das HTML-Element in das die Applikation gerendert wird. */
@@ -25,11 +37,16 @@ define(
         /** @var {string} ID des Elements in der die Applikation gerendert wird */
         targetElementId: 'zeus-reporting',
 
-        // Das LocalStorage-Prefix
+        /**
+         * Das localstorage-Prefix
+         *
+         * @var {string}
+         */
         localStoragePrefix: 'settings-',
 
         /**
          * Erzeugt das Element in das die Applikation gerendert wird.
+         *
          * @returns {Element}
          */
         getTargetElement: function() {
@@ -52,6 +69,14 @@ define(
         getDocument: function() {
             var frame = document.getElementById('FmeContent'); // ID des Frames mit der Zeit
             return frame.contentWindow.document;
+        },
+
+        /**
+         *  @returns {boolean}
+         */
+        isLoggedIn: function() {
+            var frame = this.getDocument();
+            return frame.getElementById('uiCtlTerminal_uiLblTermDisplyLine1').innerHTML === 'Guten Morgen!';
         },
 
         /**

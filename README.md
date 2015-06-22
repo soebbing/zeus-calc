@@ -45,6 +45,4 @@ Um das Javascript zu bauen führe folgendes auf der Konsole aus
 - Freitag als Urlaubstag markieren können, was dann dazu führt dass keine Vorarbeit nötig ist (In dem Zusammenhang:
 In der Feiertagserkennungslogik eine Prüfung einführen ob ein möglicher Feiertag ein Freitag ist.)
 - Eventuell: Andere Wochentage als Urlaubstage markieren können?
-- Zurücksetzen des Favicons "onunload" auf irgendwas generisches (ein Fragezeichen auf grauem Grund zB)
-- Erkennung ob man gerade überhaupt eingestempelt ist. Wenn dem nicht der Fall ist sollte die Leiste grau werden und die Zeit nicht laufen.
 - Auslagerung der Logik für das Auslesen der entsprechenden Tags der Seite in übergebbare Callback-Funktionen. Dadurch wird das Tool generischer und auch für andere Zeiterfassungen nutzbar.

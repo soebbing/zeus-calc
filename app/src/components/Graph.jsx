@@ -4,12 +4,11 @@ define(['react',
     'src/services/Time'], function(React, GraphContent, Time) {
 
     var Graph = React.createClass({
-
-        render: function(){
-
+        getColor: function() {
             var colorLow = '#f00'; // Erstmal ist der Wert rot wenn zuwenig Stunden geleistet wurden.
             var colorOk = '#F08900'; // Sind wir allgemein im Plus wird die Farbe Orange
             var colorGreat = '#090';
+            var colorLoggedOut = '#CCC';
 
             var color = colorLow;
 
@@ -22,6 +21,16 @@ define(['react',
             if (this.props.timeWorked >= this.props.timeNecessary + this.props.timeExtraToNow) {
                 color = colorGreat;
             }
+
+            if (!this.props.isLoggedIn) {
+                color = colorLoggedOut;
+            }
+
+            return color;
+        },
+
+        render: function(){
+            var color = this.getColor();
 
             var completed = this.props.timeWorked/(this.props.timeNecessary+this.props.timeExtraToNow)*100;
 

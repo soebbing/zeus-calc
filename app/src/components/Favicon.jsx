@@ -4,10 +4,12 @@ define([
     'src/services/Time'], function(React, Time) {
 
     var Favicon = React.createClass({
-        render: function() {
+        getColor: function () {
+
             var colorLow = '#f00'; // Erstmal ist der Wert rot wenn zuwenig Stunden geleistet wurden.
             var colorOk = '#F08900'; // Sind wir allgemein im Plus wird die Farbe Orange
             var colorGreat = '#090';
+            var colorLoggedOut = '#CCC';
 
             var color = colorLow;
 
@@ -21,6 +23,15 @@ define([
                 color = colorGreat;
             }
 
+            if (!this.props.isLoggedIn) {
+                color = colorLoggedOut;
+            }
+
+            return color;
+        },
+
+        render: function() {
+            var color = this.getColor();
             var canvas = document.createElement('canvas');
             canvas.width = 32;
             canvas.height = 32;
@@ -48,7 +59,6 @@ define([
             if (!favicon) {
                 favicon = document.createElement('link');
                 favicon.id = 'zeus-favicon';
-                //favicon.type = 'image/png';
                 favicon.rel = 'shortcut icon';
                 document.getElementsByTagName('head')[0].appendChild(favicon);
             }

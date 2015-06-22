@@ -10,9 +10,19 @@ define([
 ], function (React, Time, Graph, Message, Settings, Title, Favicon) {
     var Application = React.createClass({
         getInitialState: function () {
+            var that = this;
+
+            // Vor dem Ende der Seite setzen wir den Status "nicht eingeloggt" damit das Favicon grau wird.
+            window.addEventListener('beforeunload', function(event) {
+                that.setState({
+                    isLoggedIn: false
+                });
+            }, false);
+
             return {
                 notificationShownInSession: false,
                 settings: this.props.settings,
+                isLoggedIn: this.props.settings.isLoggedIn(),
                 useBreakAutomation: this.props.settings.getUseBreakAutomation(),
                 fridayWorktime: this.props.settings.getFridayWorktime(),
                 showNotification: this.props.settings.getShowNotification(),
@@ -67,6 +77,7 @@ define([
         },
 
         /**
+         * Behandelt Änderungen der Freitaglichen Arbeitszeit.
          *
          * @param {Event} e
          */
@@ -83,6 +94,7 @@ define([
         },
 
         /**
+         * Behandelt Änderungen bzgl. ob Pausen automatisch eingerechnet werden sollen.
          *
          * @param {Event} e
          */
@@ -100,6 +112,7 @@ define([
         },
 
         /**
+         * Behandelt Änderungen des Status ob eine Benachrichtigung angezeigt werden soll.
          *
          * @param {Event} e
          */
@@ -132,15 +145,19 @@ define([
          * Startet ein Intervall, das alle 10 Sekunden den dargestellten Wert aktualisiert.
          */
         componentDidMount: function () {
-            window.setInterval(this.handleTimeWorkedChange, 10000);
+            if (this.props.settings.isLoggedIn()) {
+                window.setInterval(this.handleTimeWorkedChange, 10000);
+            }
         },
 
         render: function () {
-            // <Table timeNecessary={this.state.timeNecessary} timeExtraToNow={this.state.timeExtraToNow} timePerWeek={this.state.timePerWeek} timeWorked={this.state.timeWorked} />
             return (
                 <div className="zeus-reporting-wrapper">
                     <h1>🍺 Feierabendvorhersage</h1>
-                    <Graph timeNecessary={this.state.timeNecessary} timeExtraToNow={this.state.timeExtraToNow} timeWorked={this.state.timeWorked} />
+                    <Graph timeNecessary={this.state.timeNecessary}
+                        timeExtraToNow={this.state.timeExtraToNow}
+                        timeWorked={this.state.timeWorked}
+                        isLoggedIn={this.state.isLoggedIn} />
                     <Message />
                     <Settings timePerWeek={this.state.timePerWeek}
                         timeWorked={this.state.timeWorked}
@@ -152,7 +169,10 @@ define([
                         useBreakAutomation={this.state.useBreakAutomation}
                         onUseBreakAutomationChange={this.handleUseBreakAutomationChange} />
                     <Title timeNecessary={this.state.timeNecessary} timeExtraToNow={this.state.timeExtraToNow} timeWorked={this.state.timeWorked} />
-                    <Favicon timeNecessary={this.state.timeNecessary} timeExtraToNow={this.state.timeExtraToNow} timeWorked={this.state.timeWorked} />
+                    <Favicon timeNecessary={this.state.timeNecessary}
+                        timeExtraToNow={this.state.timeExtraToNow}
+                        timeWorked={this.state.timeWorked}
+                        isLoggedIn={this.state.isLoggedIn} />
                 </div>
             )
         }
