@@ -43,14 +43,14 @@ require([
 function loadStyles(SettingsRepository) {
     var css = document.createElement('link');
     css.rel = 'stylesheet';
-    //css.href = 'https://rawgit.com/soebbing/zeus-calc/master/app/css/app.css';
-    css.href = 'https://virt.janvanderstorm.de/css/app.css';
+    css.href = 'https://rawgit.com/soebbing/zeus-calc/master/app/css/app.css';
 
     var frame = SettingsRepository.getDocument();
     frame.getElementsByTagName('head')[0].appendChild(css);
 }
 
 /**
+ * Erzeugt ein neues DIV und hängt es an den Body des Ziel-Frames an.
  *
  * @param SettingsRepository
  * @returns {HTMLElement}
@@ -62,6 +62,11 @@ function createTargetElement(SettingsRepository) {
     return target;
 }
 
+/**
+ * Erzeugt ein DIV das als Hintergrund für die App dient.
+ *
+ * @param SettingsRepository
+ */
 function createBackdropElement(SettingsRepository) {
     var frame = SettingsRepository.getDocument();
     var backdrop = frame.createElement('div');
