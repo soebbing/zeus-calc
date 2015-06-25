@@ -32,8 +32,9 @@ define(['react',
         render: function(){
             var color = this.getColor();
 
-            var completed = this.props.timeWorked/(this.props.timeNecessary+this.props.timeExtraToNow)*100;
+            var timeDiff = (this.props.timeNecessary + this.props.timeExtraToNow) - this.props.timeNecessaryYesterday;
 
+            var completed = ((this.props.timeWorked - this.props.timeNecessaryYesterday) / timeDiff) * 100;
             if (completed < 0) {
                 completed = 0;
             }

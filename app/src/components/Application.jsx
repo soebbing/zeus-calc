@@ -155,6 +155,7 @@ define([
                 <div className="zeus-reporting-wrapper">
                     <h1>🍺 Feierabendvorhersage</h1>
                     <Graph timeNecessary={this.state.timeNecessary}
+                        timeNecessaryYesterday={this.props.settings.getTimeNecessaryToYesterday()}
                         timeExtraToNow={this.state.timeExtraToNow}
                         timeWorked={this.state.timeWorked}
                         isLoggedIn={this.state.isLoggedIn} />

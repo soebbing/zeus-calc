@@ -158,6 +158,30 @@ define(
         },
 
         /**
+         * Ermittelt wieviele Stunden bis gestern gearbeitet werden mussten. Ist wichtig für die Berechnung des
+         * prozentualen Wertes wieviel man gearbeitet hat.
+         *
+         * @return {number}
+         */
+        getTimeNecessaryToYesterday: function() {
+            var yesterday = new Date().getDay() - 1;
+            if (yesterday === 0) { // Montags gibt es nix zu berechnen.
+                return 0;
+            }
+
+            var weekDays = Time.getNumberOfWorkDaysInWeek();
+            var freeHours = (5 - weekDays) * (this.getTimePerWeek() / 5); // Arbeitszeit an Feiertagen
+            var workHoursWithoutFriday = this.getTimePerWeek() - this.getFridayWorktime();
+            var timeExtraPerDay = ((workHoursWithoutFriday - freeHours) / (weekDays-1)) - (this.getTimePerWeek() / 5); // Soviel Zeit muss pro Tag vorgearbeitet werden
+
+            var timeExtraToYesterday = timeExtraPerDay * yesterday; // Soviel Zeit muss bis zum aktuellen Wochentag vorgearbeitet werden
+
+            var timeNecessary = (yesterday * this.getTimePerWeek() / 5) + timeExtraToYesterday;
+            window.console.log("timeNecessaryToYesterday", timeNecessary);
+            return timeNecessary;
+        },
+
+        /**
          * Ermittelt wieviel mehr zusätzlich bis zum aktuellen Wochentag gearbeitet werden muss.
          *
          * @returns {number}
