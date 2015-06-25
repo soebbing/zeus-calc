@@ -176,9 +176,7 @@ define(
 
             var timeExtraToYesterday = timeExtraPerDay * yesterday; // Soviel Zeit muss bis zum aktuellen Wochentag vorgearbeitet werden
 
-            var timeNecessary = (yesterday * this.getTimePerWeek() / 5) + timeExtraToYesterday;
-            window.console.log("timeNecessaryToYesterday", timeNecessary);
-            return timeNecessary;
+            return (yesterday * this.getTimePerWeek() / 5) + timeExtraToYesterday;
         },
 
         /**

@@ -32,9 +32,11 @@ define(['react',
         render: function(){
             var color = this.getColor();
 
+            // Differenz der Zeit die bis gestern und die bis heute gearbeitet werden muss.
             var timeDiff = (this.props.timeNecessary + this.props.timeExtraToNow) - this.props.timeNecessaryYesterday;
 
-            var completed = ((this.props.timeWorked - this.props.timeNecessaryYesterday) / timeDiff) * 100;
+            var completed = Math.round(((this.props.timeWorked - this.props.timeNecessaryYesterday) / timeDiff) * 100);
+
             if (completed < 0) {
                 completed = 0;
             }
