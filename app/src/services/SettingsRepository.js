@@ -76,7 +76,11 @@ define(
          */
         isLoggedIn: function() {
             var frame = this.getDocument();
-            return frame.getElementById('uiCtlTerminal_uiLblTermDisplyLine1').innerHTML === 'Guten Morgen!';
+
+            var loggedInTerminal = frame.getElementById('uiCtlTerminal_uiLblTermDisplyLine1').innerHTML === 'Guten Morgen!';
+
+            return loggedInTerminal &&
+                this.timeWorkedAt.getDate() === new Date().getDate(); // Check auf Tageswechsel
         },
 
         /**

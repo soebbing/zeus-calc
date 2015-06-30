@@ -27,14 +27,14 @@ require([
     // ZEUS versucht die Seite nach einer Weile auf die Logout-URL weiterzuleiten, das verhindern wir.
     window.clearTimeout(window['objWinTimeout'] || null);
 
-    Application = React.createFactory(Application);
+    Application = React.createFactory(Application); // Erzeugen der eigentlichen Applikation
     React.render(Application({
         settings: SettingsRepository
     }), createTargetElement(SettingsRepository));
 
-    createBackdropElement(SettingsRepository);
+    createBackdropElement(SettingsRepository); // Hintergrund erzeugen
 
-    loadStyles(SettingsRepository);
+    loadStyles(SettingsRepository); // Styles aus rawgit laden
 });
 
 /**

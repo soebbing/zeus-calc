@@ -52,6 +52,7 @@ define([
             }
 
             this.setState({
+                isLoggedIn: this.props.settings.isLoggedIn(),
                 notificationShownInSession: notificationShownInSession,
                 timePerWeek: this.props.settings.getTimePerWeek(),
                 timeWorked: this.props.settings.getTimeWorked(),
