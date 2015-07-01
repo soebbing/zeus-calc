@@ -55,7 +55,10 @@ define(['react',
             return (
                 <div className="progressbar-container">
                     <div className="progressbar-progress" style={style} title={title}>
-                        <GraphContent timeNecessary={this.props.timeNecessary} timeExtraToNow={this.props.timeExtraToNow} timeWorked={this.props.timeWorked} />
+                        <GraphContent timeNecessary={this.props.timeNecessary}
+                            timeExtraToNow={this.props.timeExtraToNow}
+                            timeWorked={this.props.timeWorked}
+                            isLoggedIn={this.props.isLoggedIn} />
                     </div>
                 </div>
             );

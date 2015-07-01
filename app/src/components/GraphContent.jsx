@@ -35,6 +35,10 @@ define([
                 message = '🍺! (+'+ Time.floatToTime(Math.abs((this.props.timeNecessary + this.props.timeExtraToNow) - this.props.timeWorked)) + 'h)';
             }
 
+            if (!this.props.isLoggedIn) { // Wenn wir nicht eingeloggt sind, dann macht auch die Ausgabe keinen Sinn
+                message = '';
+            }
+
             return (
                 <div className="graph-content">
                     {message}
