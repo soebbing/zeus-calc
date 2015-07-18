@@ -141,6 +141,11 @@ define(
          */
         getTimeNecessaryToToday: function() {
             var dayOfWeek = new Date().getDay();
+
+            if (dayOfWeek > 5) { // Wenn man am Wochenende arbeitet sollte das schon mal passen
+                dayOfWeek = 5;
+            }
+
             var timeNecessary = dayOfWeek * this.getTimePerWeek() / 5;
 
             // Bei allen Wochentagen vor Freitag rechnen wir noch die Pausen drauf
@@ -196,7 +201,7 @@ define(
 
             var timeExtraToNow = timeExtraPerDay * new Date().getDay(); // Soviel Zeit muss bis zum aktuellen Wochentag vorgearbeitet werden
 
-            if (new Date().getDay() == 5) { // Am Freitag müssen wir nicht mehr vorarbeiten
+            if (new Date().getDay() >= 5) { // Am Freitag müssen wir nicht mehr vorarbeiten
                 timeExtraToNow = 0;
             }
 

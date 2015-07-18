@@ -35,6 +35,10 @@ define(['react',
             // Differenz der Zeit die bis gestern und die bis heute gearbeitet werden muss.
             var timeDiff = (this.props.timeNecessary + this.props.timeExtraToNow) - this.props.timeNecessaryYesterday;
 
+            if (timeDiff < 0) { // Am Wochenende ist timeDiff negativ, daher setzen wir das in solch einem Fall zurück.
+                timeDiff = 0;
+            }
+
             var completed = Math.round(((this.props.timeWorked - this.props.timeNecessaryYesterday) / timeDiff) * 100);
 
             if (completed < 0) {

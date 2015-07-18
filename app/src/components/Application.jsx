@@ -46,7 +46,7 @@ define([
                     !this.state.notificationShownInSession) { // ..und wir noch keine gezeigt haben
                 new Notification('Schönen Feierabend!', {
                     icon: 'http://www.fancyicons.com/free-icons/103/glass/png/32/beer_glass_full_32.png',
-                    body: 'Du hast diese Woche bisher ' + Math.round(this.props.settings.getTimeWorked()*10)/10 + 'h gearbeitet, komm gut nach Haus!'
+                    body: 'Du hast diese Woche bisher ' + Time.floatToTime(Math.round(this.props.settings.getTimeWorked()*10)/10) + 'h gearbeitet, komm gut nach Haus!'
                 });
                 notificationShownInSession = true;
             }

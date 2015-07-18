@@ -10,7 +10,7 @@ define([], function () {
          */
         floatToTime: function (floatTime) {
             var parts = new Date(floatTime * 3600 * 1000).toUTCString().split(' ')[4].split(':');
-            return parts[0] + ':' + parts[1];
+            return parseInt(floatTime) + ':' + parts[1];
         },
 
         /**
