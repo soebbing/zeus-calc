@@ -200,6 +200,7 @@ define([
                         onShowNotificationChange={this.handleShowNotificationChange}
                         useBreakAutomation={this.state.useBreakAutomation}
                         onUseBreakAutomationChange={this.handleUseBreakAutomationChange}
+                        pushbulletAccessToken={this.state.pushbulletAccessToken}
                         onPushbulletAccessTokenChange={this.handlePushbulletAccessTokenChange}/>
                     <Title timeNecessary={this.state.timeNecessary} timeExtraToNow={this.state.timeExtraToNow} timeWorked={this.state.timeWorked} />
                     <Favicon timeNecessary={this.state.timeNecessary}
