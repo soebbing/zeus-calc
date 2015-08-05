@@ -279,6 +279,24 @@ define(
 
         setUseBreakAutomation: function(useBreak) {
             this.useBreakAutomation = useBreak;
+        },
+
+        /**
+         * Speichert ob eine Notification angezeigt werden soll.
+         *
+         * @param {string} pushbulletAccessToken
+         */
+        setPushbulletAccessToken: function(pushbulletAccessToken) {
+            localStorage.setItem(this.localStoragePrefix + 'pushbulletAccessToken', pushbulletAccessToken);
+        },
+
+        /**
+         * Liefert ob der Nutzer wünscht dass eine Notification zum Feierabend angezeigt werden soll.
+         *
+         * @returns {boolean}
+         */
+        getPushbulletAccessToken: function() {
+            return localStorage.getItem(this.localStoragePrefix + 'pushbulletAccessToken');
         }
     };
 

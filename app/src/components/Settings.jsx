@@ -24,6 +24,10 @@ define(['react'], function(React) {
             this.props.onFridayWorktimeChange({fridayWorktime: newFridayWorktime});
         },
 
+        onChangePushbulletAccessToken: function() {
+            this.props.onPushbulletAccessTokenChange({pushbulletAccessToken: this.refs.pushbulletAccessToken.getDOMNode().value.trim()});
+        },
+
         onChangeShowNotification: function() {
             this.props.onShowNotificationChange({showNotification: this.refs.showNotification.getDOMNode().checked});
         },
@@ -81,6 +85,16 @@ define(['react'], function(React) {
                         <label className={useBreakAutomationClasses}>
                             <input type="checkbox" ref="useBreakAutomation" checked={this.props.useBreakAutomation} onChange={this.onChangeUseBreakAutomation} />
                             Pausenautomat <small>(Spätere Frühstücks- und Mittagspausen einrechnen)</small>
+                        </label>
+                        <label>
+                            <input type="text"
+                                maxLength="50"
+                                value={this.props.pushbulletAccessToken}
+                                ref="pushbulletAccessToken"
+                                placeholder="Pushbullet Access Token"
+                                onChange={this.onChangePushbulletAccessToken}
+                                className="pushbullet" />
+                            Pushbullet Access Token
                         </label>
                     </div>
                 </div>

@@ -28,6 +28,7 @@ define([], function () {
         },
 
         /**
+         * Ermittelt die Anzahl der Arbeitstage in der aktuellen Woche (5-Anzahl Feiertage).
          *
          * @returns {number}
          */

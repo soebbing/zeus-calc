@@ -2,12 +2,13 @@
 define([
     'react',
     'src/services/Time',
+    'src/services/Pushbullet',
     'jsx!src/components/Graph',
     'jsx!src/components/Message',
     'jsx!src/components/Settings',
     'jsx!src/components/Title',
     'jsx!src/components/Favicon'
-], function (React, Time, Graph, Message, Settings, Title, Favicon) {
+], function (React, Time, Pushbullet, Graph, Message, Settings, Title, Favicon) {
     var Application = React.createClass({
         getInitialState: function () {
             var that = this;
@@ -21,8 +22,10 @@ define([
 
             return {
                 notificationShownInSession: false,
+                pushBulletSendInSession: false,
                 settings: this.props.settings,
                 isLoggedIn: this.props.settings.isLoggedIn(),
+                pushbulletAccessToken: this.props.settings.getPushbulletAccessToken(),
                 useBreakAutomation: this.props.settings.getUseBreakAutomation(),
                 fridayWorktime: this.props.settings.getFridayWorktime(),
                 showNotification: this.props.settings.getShowNotification(),
@@ -38,22 +41,42 @@ define([
          */
         handleTimeWorkedChange: function() {
             var notificationShownInSession = this.state.notificationShownInSession;
+            var pushbulletSendInSession = this.state.pushbulletSendInSession;
 
-            if (this.props.settings.getTimeWorked() > (this.props.settings.getTimeNecessaryToToday() + this.props.settings.getTimeExtraToToday()) && // Wenn Feierabend ist...
-                    'Notification' in window && // ...und im Browser die Notification API existiert...
-                    Notification.permission === 'granted' && // ...und wir die Erlaubnis für Notifications haben...
-                    this.state.settings.getShowNotification() && // ...und der Nutzer eine Notification wünscht...
-                    !this.state.notificationShownInSession) { // ..und wir noch keine gezeigt haben
-                new Notification('Schönen Feierabend!', {
-                    icon: 'http://www.fancyicons.com/free-icons/103/glass/png/32/beer_glass_full_32.png',
-                    body: 'Du hast diese Woche bisher ' + Time.floatToTime(Math.round(this.props.settings.getTimeWorked()*10)/10) + 'h gearbeitet, komm gut nach Haus!'
-                });
-                notificationShownInSession = true;
+            if (this.props.settings.getTimeWorked() > (this.props.settings.getTimeNecessaryToToday() + this.props.settings.getTimeExtraToToday())) { // Wenn Feierabend ist...
+                var title = 'Schönen Feierabend!',
+                    icon = 'http://www.fancyicons.com/free-icons/103/glass/png/32/beer_glass_full_32.png',
+                    body = 'Du hast diese Woche bisher ' + Time.floatToTime(Math.round(this.props.settings.getTimeWorked()*10)/10) + 'h gearbeitet, komm gut nach Haus!';
+
+                if ('Notification' in window && // ...und im Browser die Notification API existiert...
+                        Notification.permission === 'granted' && // ...und wir die Erlaubnis für Notifications haben...
+                        this.state.settings.getShowNotification() && // ...und der Nutzer eine Notification wünscht...
+                        !this.state.notificationShownInSession) { // ..und wir noch keine gezeigt haben
+                    new Notification(title, {
+                        icon: icon,
+                        body: body
+                    });
+
+                    notificationShownInSession = true;
+                }
+
+                // Check auf Pushbullet
+                if (!pushbulletSendInSession &&
+                    this.props.settings.getPushbulletAccessToken()) {
+                    Pushbullet.sendNotification(this.props.settings.getPushbulletAccessToken(), {
+                        title: title,
+                        icon: icon,
+                        body: body
+                    });
+
+                    pushbulletSendInSession = true;
+                }
             }
 
             this.setState({
                 isLoggedIn: this.props.settings.isLoggedIn(),
                 notificationShownInSession: notificationShownInSession,
+                pushbulletSendInSession: pushbulletSendInSession,
                 timePerWeek: this.props.settings.getTimePerWeek(),
                 timeWorked: this.props.settings.getTimeWorked(),
                 timeNecessary: this.props.settings.getTimeNecessaryToToday(),
@@ -142,6 +165,13 @@ define([
             });
         },
 
+        handlePushbulletAccessTokenChange: function(e) {
+            this.state.settings.setPushbulletAccessToken(e.pushbulletAccessToken);
+
+            this.setState({pushbulletAccessToken: e.pushbulletAccessToken});
+
+        },
+
         /**
          * Startet ein Intervall, das alle 10 Sekunden den dargestellten Wert aktualisiert.
          */
@@ -169,7 +199,8 @@ define([
                         showNotification={this.state.showNotification}
                         onShowNotificationChange={this.handleShowNotificationChange}
                         useBreakAutomation={this.state.useBreakAutomation}
-                        onUseBreakAutomationChange={this.handleUseBreakAutomationChange} />
+                        onUseBreakAutomationChange={this.handleUseBreakAutomationChange}
+                        onPushbulletAccessTokenChange={this.handlePushbulletAccessTokenChange}/>
                     <Title timeNecessary={this.state.timeNecessary} timeExtraToNow={this.state.timeExtraToNow} timeWorked={this.state.timeWorked} />
                     <Favicon timeNecessary={this.state.timeNecessary}
                         timeExtraToNow={this.state.timeExtraToNow}

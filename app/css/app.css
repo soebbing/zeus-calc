@@ -70,6 +70,9 @@
     margin: 0 10px 0 0;
     padding: 1px 5px;
 }
+#zeus-reporting .settings input.pushbullet {
+    width:200px
+}
 
 #zeus-reporting label.disabled {
     color: #999;
