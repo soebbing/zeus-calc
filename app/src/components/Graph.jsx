@@ -49,7 +49,7 @@ define(['react',
             }
 
             var style = {
-                backgroundColor: this.props.color || color,
+                backgroundColor: color,
                 width: completed + '%'
             };
 
