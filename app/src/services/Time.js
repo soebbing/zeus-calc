@@ -121,7 +121,7 @@ define([], function () {
             feiertage = feiertage.concat([this.toDateString(karfreitag), this.toDateString(ostermontag), this.toDateString(christi_himmelfahrt), this.toDateString(pfingstmontag)]);
 
             // Jetzt Bundeslandspezifisch
-            // Heilige 3 Koenige
+            // Heilige 3 Könige
             if (bula == 'BW' || bula == 'BY' || bula == 'ST') {
                 feiertage.unshift(j + '-01-06');
             }

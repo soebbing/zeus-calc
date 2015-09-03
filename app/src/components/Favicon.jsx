@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 define([
     'react',
-    'src/services/Time'], function(React, Time) {
+    'src/services/IconRepository'], function(React, Icon) {
 
     var Favicon = React.createClass({
         getColor: function () {
@@ -53,7 +53,7 @@ define([
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillStyle = 'white';
-            ctx.fillText('🍺', 15, 18, 18);
+            ctx.fillText(Icon.getIcon(), 15, 18, 18);
 
             var favicon = document.getElementById('zeus-favicon');
             if (!favicon) {

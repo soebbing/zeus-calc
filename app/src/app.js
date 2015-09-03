@@ -14,8 +14,9 @@ require.config({
 require([
     'react',
     'jsx!src/components/Application',
-    'src/services/SettingsRepository'
-    ], function(React, Application, SettingsRepository) {
+    'src/services/SettingsRepository',
+    'src/services/IconRepository'
+    ], function(React, Application, SettingsRepository, Icon) {
 
     try { // Wir checken einmal ob wir auf der richtigen Seite sind...
         SettingsRepository.getTimeWorked()
@@ -27,6 +28,9 @@ require([
     // ZEUS versucht die Seite nach einer Weile auf die Logout-URL weiterzuleiten, das verhindern wir.
     window.clearTimeout(window['objWinTimeout'] || null);
 
+    // Wir checken ob ein eigenes Icon gesetzt werden soll
+    checkCustomIcon(Icon);
+
     Application = React.createFactory(Application); // Erzeugen der eigentlichen Applikation
     React.render(Application({
         settings: SettingsRepository
@@ -36,6 +40,18 @@ require([
 
     loadStyles(SettingsRepository); // Styles aus rawgit laden
 });
+
+/**
+ * Prüft ob ein eigenes Icon benutzt werden soll
+ * @param Icon
+ */
+function checkCustomIcon(Icon) {
+    var jsLink = window.document.getElementById('zeus-calc-src');
+    if (jsLink.getAttribute('data-icon')) {
+        var icon = jsLink.getAttribute('data-icon');
+        Icon.setIcon(icon);
+    }
+}
 
 /**
  * @param SettingsRepository

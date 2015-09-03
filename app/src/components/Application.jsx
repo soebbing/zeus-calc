@@ -2,13 +2,14 @@
 define([
     'react',
     'src/services/Time',
+    'src/services/IconRepository',
     'src/services/Pushbullet',
     'jsx!src/components/Graph',
     'jsx!src/components/Message',
     'jsx!src/components/Settings',
     'jsx!src/components/Title',
     'jsx!src/components/Favicon'
-], function (React, Time, Pushbullet, Graph, Message, Settings, Title, Favicon) {
+], function (React, Time, Icon, Pushbullet, Graph, Message, Settings, Title, Favicon) {
     var Application = React.createClass({
         getInitialState: function () {
             var that = this;
@@ -184,7 +185,7 @@ define([
         render: function () {
             return (
                 <div className="zeus-reporting-wrapper">
-                    <h1>🍺 Feierabendvorhersage</h1>
+                    <h1>{Icon.getIcon()} Feierabendvorhersage</h1>
                     <Graph timeNecessary={this.state.timeNecessary}
                         timeNecessaryYesterday={this.props.settings.getTimeNecessaryToYesterday()}
                         timeExtraToNow={this.state.timeExtraToNow}

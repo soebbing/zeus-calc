@@ -7,7 +7,19 @@ pünktlich um 14 Uhr (oder wann auch immer Du schaffst) Feierabend zu machen.
 
 Erstelle ein neues Lesezeichen in Deinem Browser und hinterlege als URL den folgenden Code:
 
-    javascript:(function(){var url='https://rawgit.com/soebbing/zeus-calc/master/dist/app.min.js';var jsCode=document.createElement('script');jsCode.setAttribute('src',url+'?'+Math.random());document.body.appendChild(jsCode);}());
+    javascript:(function(){var url='https://rawgit.com/soebbing/zeus-calc/master/dist/app.min.js';var jsCode=document.createElement('script');jsCode.setAttribute('data-icon','\uD83C\uDF7A');jsCode.setAttribute("data-main", "/dist/src/app");jsCode.setAttribute('id', 'zeus-calc-src');jsCode.setAttribute('src',url+'?'+Math.random());document.body.appendChild(jsCode);}());
+
+Das Attribut 'data-icon' kannst Du gegen ein anderes Unicode-Zeichen Deiner Wahl austauschen, es ersetzt dann das "Beer"-
+Icon das als Standard benutzt wird. Suche unter http://www.fileformat.info/info/unicode/ ein passendes Zeichen aus und kopiere
+den Wert der unter "Encodings / C/C++/Java source code" eingetragen ist. Zum Beispiel:
+
+- &#127866; : \uD83C\uDF7A
+- &#9728; : \u2600 (Sonne)
+- &#x1f377; : \uD83C\uDF77 (Wein)
+- &#127881; : \uD83C\uDF89 (Party Popper)
+- &#128643; : \uD83D\uDE83 (Waggon)
+- &#8962; : \u2302 (Home)
+- &#127969; : \uD83C\uDFE1 (Haus mit Garten)
 
 Du musst eventuell die JS-Datei auf einen eigenen Server legen und die URL in der "url"-Variable entsprechend anpassen.
 
