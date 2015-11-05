@@ -43,6 +43,10 @@
     width: 400px;
     text-align: center;
 }
+#zeus-reporting .progressbar-container .graph-content.warning {
+    font-weight: bold;
+    color: #db0000;
+}
 #zeus-reporting .comment {
     margin: 10px 0;
     float: right;

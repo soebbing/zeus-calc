@@ -28,6 +28,10 @@ define([
                 message = '(+'+ Time.floatToTime(Math.abs((this.props.timeNecessary + this.props.timeExtraToNow) - this.props.timeWorked)) + 'h)';
             }
 
+            if (!this.props.isLoggedIn) { // Wenn wir nicht eingeloggt sind, dann macht auch die Ausgabe keinen Sinn
+                message = 'Du bist nicht eingebucht!';
+            }
+
             document.title = message;
 
             return (

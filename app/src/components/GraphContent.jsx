@@ -36,12 +36,14 @@ define([
                 message = Icon.getIcon() + '! (+'+ Time.floatToTime(Math.abs((this.props.timeNecessary + this.props.timeExtraToNow) - this.props.timeWorked)) + 'h)';
             }
 
+            var className = 'graph-content';
             if (!this.props.isLoggedIn) { // Wenn wir nicht eingeloggt sind, dann macht auch die Ausgabe keinen Sinn
-                message = '';
+                message = 'Du bist nicht eingebucht!';
+                className += ' warning';
             }
 
             return (
-                <div className="graph-content">
+                <div className={className}>
                     {message}
                 </div>
             )

@@ -72,6 +72,8 @@ define(
         },
 
         /**
+         * Liefert ob der Nutzer eingeloggt ist.
+         *
          *  @returns {boolean}
          */
         isLoggedIn: function() {
@@ -273,10 +275,20 @@ define(
             return showNotification && 'Notification' in window && Notification.permission !== 'denied';
         },
 
+        /**
+         * Liefert zurück ob die Pausen automatisch berücksichtigt werden sollen.
+         *
+         * @return {boolean}
+         */
         getUseBreakAutomation: function() {
             return this.useBreakAutomation;
         },
 
+        /**
+         * Speichert ob die Pausen automatisch berücksichtigt werden sollen.
+         *
+         * @param {boolean} useBreak
+         */
         setUseBreakAutomation: function(useBreak) {
             this.useBreakAutomation = useBreak;
         },

@@ -203,7 +203,10 @@ define([
                         onUseBreakAutomationChange={this.handleUseBreakAutomationChange}
                         pushbulletAccessToken={this.state.pushbulletAccessToken}
                         onPushbulletAccessTokenChange={this.handlePushbulletAccessTokenChange}/>
-                    <Title timeNecessary={this.state.timeNecessary} timeExtraToNow={this.state.timeExtraToNow} timeWorked={this.state.timeWorked} />
+                    <Title timeNecessary={this.state.timeNecessary}
+                           timeExtraToNow={this.state.timeExtraToNow}
+                           timeWorked={this.state.timeWorked}
+                           isLoggedIn={this.state.isLoggedIn} />
                     <Favicon timeNecessary={this.state.timeNecessary}
                         timeExtraToNow={this.state.timeExtraToNow}
                         timeWorked={this.state.timeWorked}
