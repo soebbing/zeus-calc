@@ -1,5 +1,8 @@
 define([], function () {
 
+    /**
+     * @typedef {Object} Time
+     */
     var Time = {
 
         /**
@@ -30,16 +33,18 @@ define([], function () {
         /**
          * Ermittelt die Anzahl der Arbeitstage in der aktuellen Woche (5-Anzahl Feiertage).
          *
+         * @param {object} vacations
          * @returns {number}
          */
-        getNumberOfWorkDaysInWeek: function() {
+        getNumberOfWorkDaysInWeek: function(vacations) {
             var today = new Date();
             var holidays = this.getHolidays(today.getYear() + 1900, 'NW');
             var workWeekDays = this.getWorkWeek(today);
             var numberOfWorkdays = 5;
 
             for (var i = 0; i < workWeekDays.length; i++) {
-                if (holidays.contains(workWeekDays[i])) {
+                if (holidays.contains(workWeekDays[i]) ||
+                    vacations.vacations[i]) {
                     numberOfWorkdays--;
                 }
             }
@@ -85,15 +90,16 @@ define([], function () {
          *   SH = Schleswig-Holstein
          *   TH = Thüringen
          *
-         *   @param {Date} date
-         *   @param {string} bula
+         * @param {Date} date
+         * @param {string} state
+         * @return {boolean}
          */
-        isHoliday: function (date, bula) {
-            return this.getHolidays(date.getYear()+1900, bula).contains(this.toDateString(date));
+        isHoliday: function (date, state) {
+            return this.getHolidays(date.getYear() + 1900, state).contains(this.toDateString(date));
         },
 
         // Jahr = '2014', gibt ein Array mit den Feiertagen zurück im Format '2014-12-31'
-        getHolidays: function (j, bula) {
+        getHolidays: function (j, state) {
             // Feste Feiertage in allen Bundeslaendern:
             var feiertage = [j + '-01-01', j + '-05-01', j + '-10-03', j + '-12-25', j + '-12-26'];
 
@@ -122,37 +128,37 @@ define([], function () {
 
             // Jetzt Bundeslandspezifisch
             // Heilige 3 Könige
-            if (bula == 'BW' || bula == 'BY' || bula == 'ST') {
+            if (state == 'BW' || state == 'BY' || state == 'ST') {
                 feiertage.unshift(j + '-01-06');
             }
 
-            if (bula == 'BB') {
+            if (state == 'BB') {
                 feiertage.unshift(easter_str);
                 feiertage.unshift(this.toDateString(pfingstsonntag));
             }
 
             // Fronleichnam
-            if (bula == 'BW' || bula == 'BY' || bula == 'HE' || bula == 'NW' || bula == 'RP' || bula == 'SL') {
+            if (state == 'BW' || state == 'BY' || state == 'HE' || state == 'NW' || state == 'RP' || state == 'SL') {
                 feiertage.unshift(this.toDateString(fronleichnam));
             }
 
             // Maria Himmelfahrt
-            if (bula == 'SL') {
+            if (state == 'SL') {
                 feiertage.unshift(maria_himmelfahrt);
             }
 
             // Reformationstag
-            if (bula == 'BB' || bula == 'MV' || bula == 'SN' || bula == 'ST' || bula == 'TH') {
+            if (state == 'BB' || state == 'MV' || state == 'SN' || state == 'ST' || state == 'TH') {
                 feiertage.unshift(reformationstag);
             }
 
             // Allerheiligen
-            if (bula == 'BW' || bula == 'BY' || bula == 'NW' || bula == 'RP' || bula == 'SL') {
+            if (state == 'BW' || state == 'BY' || state == 'NW' || state == 'RP' || state == 'SL') {
                 feiertage.unshift(allerheiligen);
             }
 
             // Buss und Bettag
-            if (bula == 'SN') {
+            if (state == 'SN') {
                 feiertage.unshift(bussbettag);
             }
 
@@ -179,18 +185,18 @@ define([], function () {
         /**
          * Liefert den Buss- & Bettag für gegebenes Jahr.
          *
-         * @param {int} jahr
+         * @param {int} year
          * @returns {string}
          */
-        getBussBettag: function (jahr) {
-            var weihnachten = new Date(jahr, 11, 25, 12, 0, 0);
+        getBussBettag: function (year) {
+            var weihnachten = new Date(year, 11, 25, 12, 0, 0);
             var dow = weihnachten.getDate();
             var tageVorWeihnachten = (((dow == 0) ? 7 : dow) + 21 );
             var bbtag = new Date(weihnachten.getTime());
             bbtag.addDays(-tageVorWeihnachten);
-            var monat = this.zeroPadding(bbtag.getMonth() + 1);
-            var tag = this.zeroPadding(bbtag.getDate());
-            return jahr + '-' + monat + '-' + tag;
+            var month = this.zeroPadding(bbtag.getMonth() + 1);
+            var day = this.zeroPadding(bbtag.getDate());
+            return year + '-' + month + '-' + day;
         },
 
         /**

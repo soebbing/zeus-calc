@@ -1,5 +1,6 @@
 /** @jsx React.DOM */
-define(['react'], function(React) {
+define(['react',
+        'jsx!src/components/Vacations'], function(React, Vacations) {
 
     var Settings = React.createClass({
         getInitialState: function() {
@@ -86,14 +87,17 @@ define(['react'], function(React) {
                             <input type="checkbox" ref="useBreakAutomation" checked={this.props.useBreakAutomation} onChange={this.onChangeUseBreakAutomation} />
                             Pausenautomat <small>(Spätere Frühstücks- und Mittagspausen einrechnen)</small>
                         </label>
+
+                        <Vacations onVacationsChange={this.props.onVacationsChange}
+                                   vacations={this.props.vacations} />
                         <label>
                             <input type="text"
-                                maxLength="50"
-                                value={this.props.pushbulletAccessToken}
-                                ref="pushbulletAccessToken"
-                                placeholder="Pushbullet Access Token"
-                                onChange={this.onChangePushbulletAccessToken}
-                                className="pushbullet" />
+                                   maxLength="50"
+                                   value={this.props.pushbulletAccessToken}
+                                   ref="pushbulletAccessToken"
+                                   placeholder="Pushbullet Access Token"
+                                   onChange={this.onChangePushbulletAccessToken}
+                                   className="pushbullet" />
                             Pushbullet Access Token
                         </label>
                     </div>

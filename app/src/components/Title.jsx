@@ -3,6 +3,9 @@ define([
     'react',
     'src/services/Time'], function(React, Time) {
 
+    /**
+     * @typedef {Object} Title
+     */
     var Title = React.createClass({
 
         render: function() {

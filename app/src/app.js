@@ -43,7 +43,7 @@ require([
 
 /**
  * Prüft ob ein eigenes Icon benutzt werden soll
- * @param Icon
+ * @param {IconRepository} Icon
  */
 function checkCustomIcon(Icon) {
     var jsLink = window.document.getElementById('zeus-calc-src');
@@ -54,12 +54,12 @@ function checkCustomIcon(Icon) {
 }
 
 /**
- * @param SettingsRepository
+ * @param {SettingsRepository} SettingsRepository
  */
 function loadStyles(SettingsRepository) {
     var css = document.createElement('link');
     css.rel = 'stylesheet';
-    css.href = 'https://rawgit.com/soebbing/zeus-calc/master/app/css/app.css';
+    css.href = 'https://rawgit.com/soebbing/zeus-calc/vacation/app/css/app.css';
 
     var frame = SettingsRepository.getDocument();
     frame.getElementsByTagName('head')[0].appendChild(css);
@@ -68,7 +68,7 @@ function loadStyles(SettingsRepository) {
 /**
  * Erzeugt ein neues DIV und hängt es an den Body des Ziel-Frames an.
  *
- * @param SettingsRepository
+ * @param {SettingsRepository} SettingsRepository
  * @returns {HTMLElement}
  */
 function createTargetElement(SettingsRepository) {
@@ -81,7 +81,7 @@ function createTargetElement(SettingsRepository) {
 /**
  * Erzeugt ein DIV das als Hintergrund für die App dient.
  *
- * @param SettingsRepository
+ * @param {SettingsRepository} SettingsRepository
  */
 function createBackdropElement(SettingsRepository) {
     var frame = SettingsRepository.getDocument();

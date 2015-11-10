@@ -2,7 +2,10 @@ define(
     ['src/services/Time'],
     function(Time) {
 
-    var Repo = {
+    /**
+     * @typedef {Object} SettingsRepository
+     */
+    var SettingsRepository = {
         /**
          * Der Stand von wann die Arbeitszeitinformationen sind
          *
@@ -43,6 +46,15 @@ define(
          * @var {string}
          */
         localStoragePrefix: 'settings-',
+
+        /**
+         * Liefert das Bundesland zurück. Wichtig für Feiertage.
+         *
+         * @return {string}
+         */
+        getState: function() {
+            return 'NW';
+        },
 
         /**
          * Erzeugt das Element in das die Applikation gerendert wird.
@@ -148,7 +160,12 @@ define(
                 dayOfWeek = 5;
             }
 
-            var timeNecessary = dayOfWeek * this.getTimePerWeek() / 5;
+            var weekDays = Time.getNumberOfWorkDaysInWeek(this.getVacations());
+            var freeHours = (5 - weekDays) * (this.getTimePerWeek() / 5); // Arbeitszeit an Feiertagen
+            var workHoursWithoutFriday = this.getTimePerWeek() - this.getFridayWorktime();
+            var timeExtraPerDay = ((workHoursWithoutFriday - freeHours) / (weekDays-1)) - (this.getTimePerWeek() / 5); // Soviel Zeit muss pro Tag vorgearbeitet werden
+            var timeNecessary = timeExtraPerDay * dayOfWeek; // Soviel Zeit muss bis zum aktuellen Wochentag vorgearbeitet werden
+            timeNecessary = (dayOfWeek * this.getTimePerWeek() / 5) + timeNecessary;
 
             // Bei allen Wochentagen vor Freitag rechnen wir noch die Pausen drauf
             if (this.timeState.getDay() < 5 && this.getUseBreakAutomation()) {
@@ -180,7 +197,7 @@ define(
                 return 0;
             }
 
-            var weekDays = Time.getNumberOfWorkDaysInWeek();
+            var weekDays = Time.getNumberOfWorkDaysInWeek(this.getVacations());
             var freeHours = (5 - weekDays) * (this.getTimePerWeek() / 5); // Arbeitszeit an Feiertagen
             var workHoursWithoutFriday = this.getTimePerWeek() - this.getFridayWorktime();
             var timeExtraPerDay = ((workHoursWithoutFriday - freeHours) / (weekDays-1)) - (this.getTimePerWeek() / 5); // Soviel Zeit muss pro Tag vorgearbeitet werden
@@ -196,7 +213,7 @@ define(
          * @returns {number}
          */
         getTimeExtraToToday: function() {
-            var weekDays = Time.getNumberOfWorkDaysInWeek();
+            var weekDays = Time.getNumberOfWorkDaysInWeek(this.getVacations());
             var freeHours = (5 - weekDays) * (this.getTimePerWeek() / 5); // Arbeitszeit an Feiertagen
             var workHoursWithoutFriday = this.getTimePerWeek() - this.getFridayWorktime();
             var timeExtraPerDay = ((workHoursWithoutFriday - freeHours) / (weekDays-1)) - (this.getTimePerWeek() / 5); // Soviel Zeit muss pro Tag vorgearbeitet werden
@@ -211,11 +228,21 @@ define(
         },
 
         /**
-         * Liefert die Arbeitsdauer die man am Freitag investieren will.
+         * Liefert die Arbeitsdauer die man am Freitag investieren will. Berücksichtig auch ob eventuell Freitag ein
+         * Feiertag ist oder man dann Urlaub hat.
          *
          * @returns {number}
          */
         getFridayWorktime: function() {
+            var friday = new Date();
+            friday.setDate(friday.getDate() - (friday.getDay() + 6));
+
+            if (this.getVacations().vacations[4] ||
+                    Time.isHoliday(friday, this.getState())
+                ) { // Wenn Freitag Urlaub oder Feiertag ist, dann braucht nicht vorgearbeitet werden
+                return 8.;
+            }
+
             var fridayWorktime = localStorage.getItem(this.localStoragePrefix + 'fridayWorktime');
 
             if (fridayWorktime === null || isNaN(parseFloat(fridayWorktime))) {
@@ -309,8 +336,44 @@ define(
          */
         getPushbulletAccessToken: function() {
             return localStorage.getItem(this.localStoragePrefix + 'pushbulletAccessToken');
+        },
+
+        /**
+         * Liefert ein Array der Urlaubstage in dieser Arbeitswoche.
+         *
+         * Die Anzahl der Urlaubstage in der Woche ändert die Anzahl der Tage an denen vorgearbeitet werden kann. Je
+         * mehr Urlaubstage es gibt, in desto weniger Tagen muss die nötige Zeit vorgearbeitet werden.
+         *
+         * @return {Object}
+         */
+        getVacations: function() {
+            var vacations = JSON.parse(localStorage.getItem(this.localStoragePrefix + 'vacations'));
+            var toOld = true;
+
+            if (vacations && vacations.date) {
+                toOld = Math.ceil(Math.abs(new Date(vacations.date).getTime() - new Date().getTime()) / (1000 * 3600 * 24)) > 6;
+            }
+
+            if (!vacations || toOld) {
+                vacations = {
+                    'date': new Date().getTime(),
+                    //           Mo     Tu     We     Th     Fr
+                    'vacations': [false, false, false, false, false]
+                }
+            }
+
+            return vacations;
+        },
+
+        /**
+         * Speichert das Array der Urlaubstage mit einem Zeitstempel im Localstorage.
+         *
+         * @param {Object} vacations
+         */
+        setVacations: function(vacations) {
+            localStorage.setItem(this.localStoragePrefix + 'vacations', JSON.stringify(vacations));
         }
     };
 
-    return Repo;
+    return SettingsRepository;
 });

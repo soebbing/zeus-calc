@@ -25,6 +25,7 @@ define([
                 notificationShownInSession: false,
                 pushBulletSendInSession: false,
                 settings: this.props.settings,
+                vacations: this.props.settings.getVacations(),
                 isLoggedIn: this.props.settings.isLoggedIn(),
                 pushbulletAccessToken: this.props.settings.getPushbulletAccessToken(),
                 useBreakAutomation: this.props.settings.getUseBreakAutomation(),
@@ -102,7 +103,23 @@ define([
         },
 
         /**
-         * Behandelt Änderungen der Freitaglichen Arbeitszeit.
+         * Behandelt Änderungen an den Urlaubstagen.
+         *
+         * @param {Event} e
+         */
+        handleVacationsChange: function (e) {
+            this.props.settings.setVacations(e.vacations);
+
+            this.setState({
+                vacations: this.props.settings.getVacations(),
+                timePerWeek: this.props.settings.getTimePerWeek(),
+                timeNecessary: this.props.settings.getTimeNecessaryToToday(),
+                timeExtraToNow: this.props.settings.getTimeExtraToToday()
+            });
+        },
+
+        /**
+         * Behandelt Änderungen der freitaglichen Arbeitszeit.
          *
          * @param {Event} e
          */
@@ -195,6 +212,7 @@ define([
                     <Settings timePerWeek={this.state.timePerWeek}
                         timeWorked={this.state.timeWorked}
                         fridayWorktime={this.state.fridayWorktime}
+                        vacations={this.state.vacations}
                         onFridayWorktimeChange={this.handleFridayWorktimeChange}
                         onTimePerWeekChange={this.handleTimePerWeekChange}
                         showNotification={this.state.showNotification}
@@ -202,7 +220,8 @@ define([
                         useBreakAutomation={this.state.useBreakAutomation}
                         onUseBreakAutomationChange={this.handleUseBreakAutomationChange}
                         pushbulletAccessToken={this.state.pushbulletAccessToken}
-                        onPushbulletAccessTokenChange={this.handlePushbulletAccessTokenChange}/>
+                        onPushbulletAccessTokenChange={this.handlePushbulletAccessTokenChange}
+                        onVacationsChange={this.handleVacationsChange} />
                     <Title timeNecessary={this.state.timeNecessary}
                            timeExtraToNow={this.state.timeExtraToNow}
                            timeWorked={this.state.timeWorked}

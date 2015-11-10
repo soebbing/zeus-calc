@@ -83,3 +83,11 @@
     cursor: not-allowed;
     pointer-events: none;
 }
+#zeus-reporting .settings .workday-wrapper input {
+    margin: 0;
+}
+#zeus-reporting .settings .workday-wrapper label {
+    display: inline-block;
+    margin: 10px 10px 10px 0;
+    padding: 0;
+}

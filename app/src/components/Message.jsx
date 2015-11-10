@@ -1,16 +1,17 @@
 /** @jsx React.DOM */
 define([
     'react',
-    'src/services/Time'], function(React, Time) {
+    'src/services/SettingsRepository',
+    'src/services/Time'], function(React, Settings, Time) {
 
     var Message = React.createClass({
         render: function() {
             var message = '';
 
-            var numberOfWorkDaysInWeek = Time.getNumberOfWorkDaysInWeek();
+            var numberOfWorkDaysInWeek = Time.getNumberOfWorkDaysInWeek(Settings.getVacations());
 
             if (numberOfWorkDaysInWeek < 5) {
-                message = '(' + (5 - numberOfWorkDaysInWeek) + ' Feiertag' + (numberOfWorkDaysInWeek < 4 ? 'e' : '') + '  berücksichtigt)'
+                message = '(' + (5 - numberOfWorkDaysInWeek) + ' Feier-/Urlaubstag' + (numberOfWorkDaysInWeek < 4 ? 'e' : '') + '  berücksichtigt)'
             }
 
             return (

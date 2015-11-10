@@ -5,7 +5,11 @@ define(
     [],
     function() {
 
-    var Icons = {
+    /**
+     * @typedef {Object} IconRepository
+     * @type {{icon: string, setIcon: IconRepository.setIcon, getIcon: IconRepository.getIcon}} IconRepository
+     */
+    var IconRepository = {
         icon: '🍺', // Beer,
 
         setIcon: function(newIcon) {
@@ -16,5 +20,5 @@ define(
             return this.icon;
         }
     };
-    return Icons;
+    return IconRepository;
 });
