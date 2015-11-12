@@ -4,6 +4,9 @@ define([
     'src/services/Time',
     'src/services/IconRepository'], function(React, Time, Icon) {
 
+    /**
+     * @typedef {Object} GraphContent
+     */
     var GraphContent = React.createClass({
         render: function() {
             var message,

@@ -149,7 +149,7 @@ define(
         },
 
         /**
-         * Ermittelt wieviele Stunden bis einschließlich dem aktuellen Tag gearbeitet werden muss.
+         * Ermittelt wieviele Stunden bis einschließlich dem aktuellen Tag gearbeitet werden MUSS.
          *
          * @returns {number}
          */
@@ -160,12 +160,7 @@ define(
                 dayOfWeek = 5;
             }
 
-            var weekDays = Time.getNumberOfWorkDaysInWeek(this.getVacations());
-            var freeHours = (5 - weekDays) * (this.getTimePerWeek() / 5); // Arbeitszeit an Feiertagen
-            var workHoursWithoutFriday = this.getTimePerWeek() - this.getFridayWorktime();
-            var timeExtraPerDay = ((workHoursWithoutFriday - freeHours) / (weekDays-1)) - (this.getTimePerWeek() / 5); // Soviel Zeit muss pro Tag vorgearbeitet werden
-            var timeNecessary = timeExtraPerDay * dayOfWeek; // Soviel Zeit muss bis zum aktuellen Wochentag vorgearbeitet werden
-            timeNecessary = (dayOfWeek * this.getTimePerWeek() / 5) + timeNecessary;
+            var timeNecessary = dayOfWeek * this.getTimePerWeek() / 5;
 
             // Bei allen Wochentagen vor Freitag rechnen wir noch die Pausen drauf
             if (this.timeState.getDay() < 5 && this.getUseBreakAutomation()) {
@@ -210,7 +205,7 @@ define(
         /**
          * Ermittelt wieviel mehr zusätzlich bis zum aktuellen Wochentag gearbeitet werden muss.
          *
-         * @returns {number}
+         * @return {number}
          */
         getTimeExtraToToday: function() {
             var weekDays = Time.getNumberOfWorkDaysInWeek(this.getVacations());
@@ -224,6 +219,7 @@ define(
                 timeExtraToNow = 0;
             }
 
+            window.console.log("timeExtraToNow", timeExtraToNow);
             return timeExtraToNow;
         },
 
@@ -231,7 +227,7 @@ define(
          * Liefert die Arbeitsdauer die man am Freitag investieren will. Berücksichtig auch ob eventuell Freitag ein
          * Feiertag ist oder man dann Urlaub hat.
          *
-         * @returns {number}
+         * @return {number}
          */
         getFridayWorktime: function() {
             var friday = new Date();
@@ -288,7 +284,7 @@ define(
         /**
          * Liefert ob der Nutzer wünscht dass eine Notification zum Feierabend angezeigt werden soll.
          *
-         * @returns {boolean}
+         * @return {boolean}
          */
         getShowNotification: function() {
             var showNotification = localStorage.getItem(this.localStoragePrefix + 'showNotification');
@@ -332,7 +328,7 @@ define(
         /**
          * Liefert ob der Nutzer wünscht dass eine Notification zum Feierabend angezeigt werden soll.
          *
-         * @returns {boolean}
+         * @return {boolean}
          */
         getPushbulletAccessToken: function() {
             return localStorage.getItem(this.localStoragePrefix + 'pushbulletAccessToken');

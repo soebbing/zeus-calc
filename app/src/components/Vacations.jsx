@@ -44,6 +44,10 @@ define([
         render: function() {
             return (
                 <div className="workday-wrapper">
+                    <span className="vacations-title">
+                        Urlaubstage diese Woche
+                    </span>
+
                     <label>
                         <input type="checkbox" ref="mo" checked={this.isVacation(0)} disabled={this.isHoliday(0)} onChange={this.onChangeVacations} />
                         Mo
@@ -64,10 +68,6 @@ define([
                         <input type="checkbox" ref="fr" checked={this.isVacation(4)} disabled={this.isHoliday(4)} onChange={this.onChangeVacations} />
                         Fr
                     </label>
-
-                    <span className="vacations-title">
-                        Einzelne Urlaubstage in dieser Woche
-                    </span>
                 </div>
                 );
         }
