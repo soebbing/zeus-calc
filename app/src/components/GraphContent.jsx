@@ -10,14 +10,13 @@ define([
     var GraphContent = React.createClass({
         render: function() {
             var message,
-                timeLeft,
-                currentTime;
-
-            if (this.props.timeWorked < this.props.timeNecessary) {
-                timeLeft = (this.props.timeNecessary + this.props.timeExtraToNow) - this.props.timeWorked;
+                timeLeft = (this.props.timeNecessary + this.props.timeExtraToNow) - this.props.timeWorked,
                 currentTime = Time.timeToFloat(new Date().getHours() + '.' + new Date().getMinutes());
 
-                message = Icon.getIcon() + ' '+ Time.floatToTime(currentTime + timeLeft) + ' Uhr (noch ' + Time.floatToTime(timeLeft) + 'h';
+            if ((this.props.timeWorked - this.props.timeNecessaryYesterday) < 0) {
+                message = Icon.getIcon() + ' ' + Time.floatToTime(currentTime + timeLeft) + ' Uhr (noch ' + Time.floatToTime(timeLeft) + 'h, Aufarbeitung von gestern)';
+            } else if (this.props.timeWorked < this.props.timeNecessary) {
+                message = Icon.getIcon() + ' ' + Time.floatToTime(currentTime + timeLeft) + ' Uhr (noch ' + Time.floatToTime(timeLeft) + 'h';
 
                 // Freitags sind beide Werte gleich, da kann man sich den zweiten Teil sparen.
                 if (timeLeft > (this.props.timeNecessary - this.props.timeWorked)) {
@@ -27,11 +26,7 @@ define([
             }
 
             if (this.props.timeWorked >= this.props.timeNecessary
-                && this.props.timeWorked >= this.props.timeNecessary
                 && this.props.timeWorked < this.props.timeNecessary + this.props.timeExtraToNow) {
-                timeLeft = (this.props.timeNecessary + this.props.timeExtraToNow) - this.props.timeWorked;
-                currentTime = Time.timeToFloat(new Date().getHours() + '.' + new Date().getMinutes());
-
                 message = Icon.getIcon() + ' '+ Time.floatToTime(currentTime + timeLeft) + ' Uhr (noch ' + Time.floatToTime(timeLeft) + 'h)';
             }
 

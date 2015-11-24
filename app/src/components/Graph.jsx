@@ -5,15 +5,19 @@ define(['react',
 
     var Graph = React.createClass({
         getColor: function() {
-            var colorLow = '#f00'; // Erstmal ist der Wert rot wenn zuwenig Stunden geleistet wurden.
-            var colorOk = '#F08900'; // Sind wir allgemein im Plus wird die Farbe Orange
-            var colorGreat = '#090';
+            var colorVeryLow = '#9E3D9E'; // Wenn man weniger als das minimum gearbeitet hat (gestern also wesentlich früher Feierabend)
+            var colorLow = 'rgba(255,0,0,0.65)'; // Erstmal ist der Wert rot wenn zuwenig Stunden geleistet wurden.
+            var colorOk = '#F08900'; // Sind wir allgemein im Plus wird die Farbe orange
+            var colorGreat = '#090'; // Ein Plus insgesamt wird grün
             var colorLoggedOut = '#CCC';
 
-            var color = colorLow;
+            var color = colorVeryLow;
+
+            if ((this.props.timeWorked - this.props.timeNecessaryYesterday) >= 0) {
+                color = colorLow;
+            }
 
             if (this.props.timeWorked >= this.props.timeNecessary
-                && this.props.timeWorked >= this.props.timeNecessary
                 && this.props.timeWorked < this.props.timeNecessary + this.props.timeExtraToNow) {
                 color = colorOk;
             }
@@ -60,6 +64,7 @@ define(['react',
                 <div className="progressbar-container">
                     <div className="progressbar-progress" style={style} title={title}>
                         <GraphContent timeNecessary={this.props.timeNecessary}
+                            timeNecessaryYesterday={this.props.timeNecessaryYesterday}
                             timeExtraToNow={this.props.timeExtraToNow}
                             timeWorked={this.props.timeWorked}
                             isLoggedIn={this.props.isLoggedIn} />

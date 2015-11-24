@@ -37,7 +37,13 @@ define([
          */
         isHoliday: function(dayId) {
             var today = new Date();
+
+            if ((today.getDay() - 1) > dayId) { // Wenn der Wochentag bereits vorbei ist, dann deaktivieren wir den Tag
+                return true;
+            }
+
             today.setDate(today.getDate() - (today.getDay() + dayId - 1));
+
             return Time.isHoliday(today, Settings.getState());
         },
 

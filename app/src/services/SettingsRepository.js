@@ -219,7 +219,6 @@ define(
                 timeExtraToNow = 0;
             }
 
-            window.console.log("timeExtraToNow", timeExtraToNow);
             return timeExtraToNow;
         },
 
