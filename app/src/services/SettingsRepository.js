@@ -193,9 +193,19 @@ define(
                 return 0;
             }
 
+            var fridayWorkTime = 8.;
+            var friday = new Date();
+            friday.setDate(friday.getDate() + (5 - friday.getDay()));
+
+            if (!this.getVacations().vacations[4] &&
+                !Time.isHoliday(friday, this.getState())
+            ) { // Wenn Freitag Urlaub oder Feiertag ist, dann braucht nicht vorgearbeitet werden
+                fridayWorkTime = this.getFridayWorktime()
+            }
+
             var weekDays = Time.getNumberOfWorkDaysInWeek(this.getVacations());
             var freeHours = (5 - weekDays) * (this.getTimePerWeek() / 5); // Arbeitszeit an Feiertagen
-            var workHoursWithoutFriday = this.getTimePerWeek() - this.getFridayWorktime();
+            var workHoursWithoutFriday = this.getTimePerWeek() - fridayWorkTime;
             var timeExtraPerDay = ((workHoursWithoutFriday - freeHours) / (weekDays-1)) - (this.getTimePerWeek() / 5); // Soviel Zeit muss pro Tag vorgearbeitet werden
 
             var timeExtraToYesterday = timeExtraPerDay * yesterday; // Soviel Zeit muss bis zum aktuellen Wochentag vorgearbeitet werden
@@ -209,9 +219,19 @@ define(
          * @return {number}
          */
         getTimeExtraToToday: function() {
+            var fridayWorkTime = 8.;
+            var friday = new Date();
+            friday.setDate(friday.getDate() + (5 - friday.getDay()));
+
+            if (!this.getVacations().vacations[4] &&
+                !Time.isHoliday(friday, this.getState())
+            ) { // Wenn Freitag Urlaub oder Feiertag ist, dann braucht nicht vorgearbeitet werden
+                fridayWorkTime = this.getFridayWorktime()
+            }
+
             var weekDays = Time.getNumberOfWorkDaysInWeek(this.getVacations());
             var freeHours = (5 - weekDays) * (this.getTimePerWeek() / 5); // Arbeitszeit an Feiertagen
-            var workHoursWithoutFriday = this.getTimePerWeek() - this.getFridayWorktime();
+            var workHoursWithoutFriday = this.getTimePerWeek() - fridayWorkTime;
             var timeExtraPerDay = ((workHoursWithoutFriday - freeHours) / (weekDays-1)) - (this.getTimePerWeek() / 5); // Soviel Zeit muss pro Tag vorgearbeitet werden
 
             var timeExtraToNow = timeExtraPerDay * new Date().getDay(); // Soviel Zeit muss bis zum aktuellen Wochentag vorgearbeitet werden
@@ -230,15 +250,6 @@ define(
          * @return {number}
          */
         getFridayWorktime: function() {
-            var friday = new Date();
-            friday.setDate(friday.getDate() - (friday.getDay() + 6));
-
-            if (this.getVacations().vacations[4] ||
-                    Time.isHoliday(friday, this.getState())
-                ) { // Wenn Freitag Urlaub oder Feiertag ist, dann braucht nicht vorgearbeitet werden
-                return 8.;
-            }
-
             var fridayWorktime = localStorage.getItem(this.localStoragePrefix + 'fridayWorktime');
 
             if (fridayWorktime === null || isNaN(parseFloat(fridayWorktime))) {
@@ -353,8 +364,8 @@ define(
             if (!vacations || toOld) {
                 vacations = {
                     'date': new Date().getTime(),
-                    //           Mo     Tu     We     Th     Fr
-                    'vacations': [false, false, false, false, false]
+                    //           Mo     Tu     We     Th     Fr      Sa     So
+                    'vacations': [false, false, false, false, false, false, false]
                 }
             }
 

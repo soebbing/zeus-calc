@@ -54,5 +54,4 @@ Um das Javascript zu bauen führe folgendes auf der Konsole aus
 
 ## Offene Punkte
 
-- Freitag als Urlaubstag markieren können, was dann dazu führt dass keine Vorarbeit nötig ist
 - Auslagerung der Logik für das Auslesen der entsprechenden Tags der Seite in übergebbare Callback-Funktionen. Dadurch wird das Tool generischer und auch für andere Zeiterfassungen nutzbar.
