@@ -1,6 +1,9 @@
 /** @jsx React.DOM */
-define(['react',
-        'jsx!src/components/Vacations'], function(React, Vacations) {
+define([
+    'react',
+    'jsx!src/components/Vacations',
+    'classnames'],
+    function(React, Vacations, classnames) {
 
     var Settings = React.createClass({
         getInitialState: function() {
@@ -10,7 +13,7 @@ define(['react',
         },
 
         onChangeTimePerWeek: function() {
-            var newTimePerWeek = parseFloat(this.refs.timePerWeek.getDOMNode().value.trim());
+            var newTimePerWeek = parseFloat(this.refs.timePerWeek.value.trim());
             this.props.onTimePerWeekChange({
                 timePerWeek: newTimePerWeek,
                 timeWorked: this.props.timeWorked
@@ -18,7 +21,7 @@ define(['react',
         },
 
         onChangeFridayWorktime: function() {
-            var newFridayWorktime = this.refs.fridayWorktime.getDOMNode().value.trim();
+            var newFridayWorktime = this.refs.fridayWorktime.value.trim();
 
             newFridayWorktime = newFridayWorktime.replace(/,/g, '.');
 
@@ -26,15 +29,15 @@ define(['react',
         },
 
         onChangePushbulletAccessToken: function() {
-            this.props.onPushbulletAccessTokenChange({pushbulletAccessToken: this.refs.pushbulletAccessToken.getDOMNode().value.trim()});
+            this.props.onPushbulletAccessTokenChange({pushbulletAccessToken: this.refs.pushbulletAccessToken.value.trim()});
         },
 
         onChangeShowNotification: function() {
-            this.props.onShowNotificationChange({showNotification: this.refs.showNotification.getDOMNode().checked});
+            this.props.onShowNotificationChange({showNotification: this.refs.showNotification.checked});
         },
 
         onChangeUseBreakAutomation: function() {
-            this.props.onUseBreakAutomationChange({useBreakAutomation: this.refs.useBreakAutomation.getDOMNode().checked});
+            this.props.onUseBreakAutomationChange({useBreakAutomation: this.refs.useBreakAutomation.checked});
         },
 
         /**
@@ -51,19 +54,18 @@ define(['react',
         },
 
         render: function(){
-            var cx = React.addons.classSet;
-            var buttonClasses = cx({
+            var buttonClasses = classnames({
                 'settings-switch': true,
                 'closed': !this.state.visible,
                 'open': this.state.visible
             });
-            var panelClasses = cx({
+            var panelClasses = classnames({
                 'settings': true,
                 'hidden': !this.state.visible
             });
 
             // Nach 14 Uhr sollten die Pausen eh schon genommen worden sein, dann ist der Automat überflüssig
-            var useBreakAutomationClasses = cx({
+            var useBreakAutomationClasses = classnames({
                 'disabled': !(new Date().getHours() < 14)
             });
 

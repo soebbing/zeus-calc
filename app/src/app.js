@@ -1,8 +1,11 @@
 require.config({
     baseUrl: 'app/',
     paths: {
-        'react':          'vendors/react/react-with-addons',
+        'jquery':         'vendors/jquery/dist/jquery',
+        'react':          'vendors/react/react',
+        'react-dom':      'vendors/react/react-dom',
         'text':           'vendors/requirejs-text/text',
+        'classnames':     'vendors/classnames/dedupe',
         'JSXTransformer': 'vendors/jsx-requirejs-plugin/js/JSXTransformer',
         'jsx':            'vendors/jsx-requirejs-plugin/js/jsx'
     },
@@ -13,10 +16,11 @@ require.config({
 
 require([
     'react',
+    'react-dom',
     'jsx!src/components/Application',
     'src/services/SettingsRepository',
     'src/services/IconRepository'
-    ], function(React, Application, SettingsRepository, Icon) {
+    ], function(React, ReactDOM, Application, SettingsRepository, Icon) {
 
     try { // Wir checken einmal ob wir auf der richtigen Seite sind...
         SettingsRepository.getTimeWorked()
@@ -32,7 +36,7 @@ require([
     checkCustomIcon(Icon);
 
     Application = React.createFactory(Application); // Erzeugen der eigentlichen Applikation
-    React.render(Application({
+    ReactDOM.render(Application({
         settings: SettingsRepository
     }), createTargetElement(SettingsRepository));
 

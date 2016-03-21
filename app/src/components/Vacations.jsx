@@ -11,11 +11,11 @@ define([
                 vacations: {
                     date: this.props.vacations.date,
                     vacations: [
-                        this.refs.mo.getDOMNode().checked,
-                        this.refs.tu.getDOMNode().checked,
-                        this.refs.we.getDOMNode().checked,
-                        this.refs.th.getDOMNode().checked,
-                        this.refs.fr.getDOMNode().checked
+                        this.refs.mo.checked,
+                        this.refs.tu.checked,
+                        this.refs.we.checked,
+                        this.refs.th.checked,
+                        this.refs.fr.checked
                     ]
                 }
             });
@@ -31,6 +31,7 @@ define([
         },
 
         /**
+         * Prüft ob der Wochentag mit gegebener dayId (in der Woche, dh. 0=Sonntag, 6=Samstag) ein Feiertag ist
          *
          * @param {string} dayId
          * @return {*}
@@ -42,7 +43,7 @@ define([
                 return true;
             }
 
-            today.setDate(today.getDate() - (today.getDay() + dayId - 1));
+            today.setDate(today.getDate() + ((dayId + 1) - today.getDay()));
 
             return Time.isHoliday(today, Settings.getState());
         },

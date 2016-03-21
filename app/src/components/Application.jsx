@@ -187,7 +187,6 @@ define([
             this.state.settings.setPushbulletAccessToken(e.pushbulletAccessToken);
 
             this.setState({pushbulletAccessToken: e.pushbulletAccessToken});
-
         },
 
         /**

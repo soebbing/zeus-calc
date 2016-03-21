@@ -39,6 +39,7 @@ define([], function () {
         getNumberOfWorkDaysInWeek: function(vacations) {
             var today = new Date();
             var holidays = this.getHolidays(today.getYear() + 1900, 'NW');
+
             var workWeekDays = this.getWorkWeek(today);
             var numberOfWorkdays = 5;
 

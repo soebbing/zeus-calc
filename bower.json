@@ -1,6 +1,6 @@
 {
   "name": "zeus-calc",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "homepage": "https://github.com/soebbing/zeus-calc",
   "authors": [
     "Hendrik Söbbing <hendrik@soebbing.de>"
@@ -17,9 +17,11 @@
     "tests"
   ],
   "dependencies": {
-    "react": "~0.13",
-    "requirejs": "~2.1.16",
-    "classnames": "~2.1",
-    "jsx-requirejs-plugin": "~0.5.2"
+    "react": "~15.*",
+    "requirejs": "~2.*",
+    "react-intl": "~1.*",
+    "jquery": "~2.*",
+    "classnames": "~2.*",
+    "jsx-requirejs-plugin": "~0.*"
   }
 }

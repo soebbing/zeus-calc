@@ -1,5 +1,6 @@
 define(
-    ['src/services/Time'],
+    ['src/services/Time',
+    'jquery'],
     function(Time) {
 
     /**
@@ -107,7 +108,7 @@ define(
             if (!doc) {
                 throw new Error('Uhrzeit nicht gefunden. Falsche Seite?')
             }
-            var lines = doc.getElementsByClassName('Line');
+            var lines = $('.Line', doc);
             if (lines.length < 3) {
                 throw new Error('Uhrzeit nicht gefunden. Falsche Seite?')
             }
