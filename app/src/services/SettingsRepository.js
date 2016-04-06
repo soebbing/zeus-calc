@@ -165,10 +165,12 @@ define(
 
             // Bei allen Wochentagen vor Freitag rechnen wir noch die Pausen drauf
             if (this.timeState.getDay() < 5 && this.getUseBreakAutomation()) {
-                if (this.timeState.getHours() <= 10) {
+                if (this.timeState.getHours() <= 9 && this.timeState.getMinutes() <= 30) {
                     timeNecessary += 0.75;
                 }
-                if (this.timeState.getHours() > 10 && this.timeState.getHours() < 14) {
+                if (this.timeState.getHours() > 9 &&
+                    this.timeState.getHours() < 13 &&
+                    this.timeState.getMinutes() <= 30) {
                     timeNecessary += 0.5;
                 }
             }
